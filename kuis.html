@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kuis Deteksi Kecanduan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1rem;
+    }
+    .container {
+      background: white;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.07);
+      max-width: 900px;
+      width: 100%;
+      border-top: 6px solid #4DB6AC;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #004d40;
+      text-align: center;
+    }
+    h3 {
+      color: #ff7043;
+      text-align: center;
+      margin-top: -0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .step {
+      font-weight: bold;
+      margin: 1.5rem 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    .question {
+      margin-bottom: 2rem;
+      color: #333;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.7rem 1.6rem;
+      margin-right: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.2s ease-in-out;
+    }
+    .yes {
+      background-color: #4DB6AC;
+      color: white;
+    }
+    .yes:hover {
+      background-color: #3a9f94;
+    }
+    .no {
+      background-color: #e0e0e0;
+      color: #333;
+    }
+    .no:hover {
+      background-color: #cfcfcf;
+    }
+    .result {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.2rem;
+      background: #e8f6ff;
+      border-left: 6px solid #0077cc;
+      border-radius: 6px;
+      color: #004d40;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Deteksi Dini Kecanduan Perilaku Negatif Seksual </h1>
+  <h3>Kenali Tanda-tandanya, Atasi Sejak Dini!</h3>
+  <h2>Pertanyaan <span id="number">1</span> dari 30</h2>
+  <div id="question" class="question"></div>
+  <div>
+    <button class="yes" onclick="submitAnswer('ya')">Ya</button>
+    <button class="no" onclick="submitAnswer('tidak')">Tidak</button>
+  </div>
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  // Gejala list (30)
+  const gejalaList = [
+    { kode: "GA01", teks: "Saya merasa gemetar saat melihat adegan ranjang" },
+    { kode: "GA02", teks: "Pertama kali dalam hidup saya melihat pria dan wanita tidak berpakaian" },
+    { kode: "GA03", teks: "Saya merasa mual saat melihat pria dan wanita berciuman" },
+    { kode: "GA04", teks: "Saya merasa khawatir jika melihat pornografi akan dimarahi" },
+    { kode: "GA05", teks: "Bagi saya melihat pria dan wanita tidak berpakaian dalam kamar adalah hal yang wajar" },
+    { kode: "GA06", teks: "Saya menutup mata ketika tiba-tiba layar hp/gadget memperlihatkan video vulgar" },
+    { kode: "GA07", teks: "Bagi saya melihat area intim wanita maupun pria adalah dosa" },
+    { kode: "GA08", teks: "Secara berkala saya mulai mencari gambar/video vulgar" },
+    { kode: "GA09", teks: "Saya merasa senang saat melihat pria dan wanita tidak berpakaian bersama" },
+    { kode: "GA10", teks: "Saya merasa bersemangat melihat pria dan wanita yang berciuman" },
+    { kode: "GA11", teks: "Sulit bagi saya membuka gadget tanpa membuka yang porno" },
+    { kode: "GA12", teks: "Terasa ada yang hilang saat saya tidak membuka gambar atau video porno" },
+    { kode: "GA13", teks: "Saya menikmati cerita romansa yang menceritakan adegan ranjang" },
+    { kode: "GA14", teks: "Saya tertarik untuk melihat area intim pria dan wanita" },
+    { kode: "GA15", teks: "Saya merasa bergairah saat melihat video/gambar yang vulgar" },
+    { kode: "GA16", teks: "Saya merasa pusing dan tidak bersemangat jika tidak melihat video porno dalam sehari" },
+    { kode: "GA17", teks: "Saya berusaha mencari gambar atau video porno dari berbagai daerah" },
+    { kode: "GA18", teks: "Bagi saya mendengarkan desahan orang berhubungan badan itu menyenangkan" },
+    { kode: "GA19", teks: "Dalam sehari saya bisa melihat konten pornografi lebih dari 1 kali" },
+    { kode: "GA20", teks: "Hal yang wajar bagi semua individu untuk melihat pornografi setiap hari" },
+    { kode: "GA21", teks: "Saya merasa baik video maupun gambar porno kurang menarik" },
+    { kode: "GA22", teks: "Saya akan merasa puas saat melihat orang berhubungan suami istri secara langsung" },
+    { kode: "GA23", teks: "Saya mengeksplorasi berbagai gerakan saat berhubungan badan" },
+    { kode: "GA24", teks: "Sebanyak apapun jumlah film porno yang dilihat tidak memengaruhi kesenangan saya" },
+    { kode: "GA25", teks: "Saya merasa bosan hanya melihat film porno" },
+    { kode: "GA26", teks: "Gambar atau film porno berputar-putar di imajinasi saya" },
+    { kode: "GA27", teks: "Saya melakukan onani/masturbasi untuk memuaskan diri sendiri" },
+    { kode: "GA28", teks: "Saya ingin memiliki pasangan untuk berhubungan intim" },
+    { kode: "GA29", teks: "Saya ingin membeli alat bantu seks untuk memenuhi kebutuhan seksual saya" },
+    { kode: "GA30", teks: "Saya akan menghabiskan waktu berjam-jam untuk menonton konten pornografi secara terus menerus, mengorbankan waktu untuk kegiatan lain yang lebih sehat dan produktif" }
+  ];
+
+  const rules = [
+    { kode: "P01", nama: "Early Exposure", if: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"] },
+    { kode: "P02", nama: "Addiction", if: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"] },
+    { kode: "P03", nama: "Escalation", if: ["GA16","GA17","GA18","GA19","GA20"] },
+    { kode: "P04", nama: "Desensitization", if: ["GA21","GA22","GA23","GA24","GA25","GA26"] },
+    { kode: "P05", nama: "Action", if: ["GA27","GA28","GA29","GA30"] }
+  ];
+
+  const userAnswers = {};
+  let current = 0;
+
+  const questionEl = document.getElementById("question");
+  const numberEl = document.getElementById("number");
+  const resultEl = document.getElementById("result");
+
+  function loadQuestion() {
+    if (current < gejalaList.length) {
+      numberEl.textContent = current + 1;
+      questionEl.textContent = gejalaList[current].teks;
+    }
+  }
+
+  function submitAnswer(jawaban) {
+    const kode = gejalaList[current].kode;
+    userAnswers[kode] = jawaban;
+    current++;
+
+    if (current < gejalaList.length) {
+      loadQuestion();
+    } else {
+      runForwardChaining();
+    }
+  }
+
+function runForwardChaining() {
+  let hasil = [];
+  for (let rule of rules) {
+    const cocok = rule.if.every(kode => userAnswers[kode] === "ya");
+    if (cocok) hasil.push(rule);
+  }
+
+  let output = `
+    <img src="https://storage.googleapis.com/a1aa/image/d3aae1fb-f566-4fd7-6f3e-25b287e00819.jpg"
+     alt="Ilustrasi psikologi"
+     style="width: 100%; border-radius: 12px; margin-bottom: 1.5rem; object-fit: cover; max-height: 240px;" />
+
+
+  `;
+
+  if (hasil.length === 0) {
+    output += `<h3 style="color:#00796B;">Tidak ditemukan indikasi kecanduan signifikan</h3>
+               <p style="font-size: 1rem; line-height: 1.6;">
+                Berdasarkan jawaban Anda, tidak ada indikasi kuat yang mengarah pada kecanduan pornografi. Namun, tetap waspadai perubahan perilaku Anda secara berkala.
+               </p>`;
+  } else {
+    const last = hasil[hasil.length - 1];
+    output += `<h3 style="color:#00796B;">Kesimpulan: ${last.nama} (${last.kode})</h3>
+               <p style="font-size: 1rem; line-height: 1.6;">
+                Gejala yang Anda alami menunjukkan bahwa Anda berada pada tahap <strong>${last.nama}</strong> dalam spektrum kecanduan pornografi. Disarankan untuk segera melakukan konsultasi atau membatasi ekspos terhadap konten tersebut.
+               </p>`;
+  }
+
+  output += `
+    <a href="index.html">
+      <button style="margin-top: 2rem; background: #0077cc; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: background 0.3s ease;">
+        Kembali ke Dashboard
+      </button>
+    </a>
+  `;
+
+  document.querySelector("h2").style.display = "none";
+  questionEl.style.display = "none";
+  document.querySelector(".yes").style.display = "none";
+  document.querySelector(".no").style.display = "none";
+  resultEl.innerHTML = output;
+  resultEl.style.display = "block";
+}
+
+
+  // Start
+  loadQuestion();
+</script>
+
+</body>
+</html>
