@@ -1,158 +1,177 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Deteksi Kecanduan</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-    body {
-      font-family: "Inter", sans-serif;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pornography Addiction Screen</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .progress-info {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .questions-left {
+            background-color: #e8f4f8;
+            color: #2c3e50;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .option.selected {
+            border: 1px solid #4a90e2;
+            background-color: #f0f7ff;
+        }
+        
+        .radio-button {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            margin-right: 15px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .option.selected .radio-button {
+            border-color: #4a90e2;
+            background-color: #4a90e2;
+        }
+        
+        .radio-button::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+        
+        .option.selected .radio-button::after {
+            opacity: 1;
+        }
+        
+        .next-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .next-button:hover {
+            background-color: #3a7bc8;
+        }
+    </style>
 </head>
-<body class="min-h-screen bg-[#03302B] relative overflow-hidden">
+<body>
+    <div class="header">
+        <h1>Pornography Addiction<br>Screen</h1>
+        <div class="progress-info">Total test: 10% completed</div>
+        <div class="questions-left">27 Questions Left</div>
+    </div>
 
-<!-- Background -->
-
-
-<div class="max-w-4xl mx-auto mt-20 bg-[#0F6B60] rounded-md shadow-lg p-8 md:p-12" id="quiz-box">
-  <!-- Dynamic content goes here -->
-</div>
-
-<script>
-  const pertanyaan = [
-    { kode: "GA01", teks: "Saya merasa gemetar saat melihat adegan ranjang", skor: 2 },
-    { kode: "GA02", teks: "Pertama kali dalam hidup saya melihat pria dan wanita tidak berpakaian", skor: 2 },
-    { kode: "GA03", teks: "Saya merasa mual saat melihat pria dan wanita berciuman", skor: 2 },
-    { kode: "GA04", teks: "Saya merasa khawatir jika melihat pornografi akan dimarahi", skor: 2 },
-    { kode: "GA05", teks: "Bagi saya melihat pria dan wanita tidak berpakaian adalah hal yang wajar", skor: 2 },
-    { kode: "GA06", teks: "Saya menutup mata ketika tiba-tiba layar memperlihatkan video vulgar", skor: 2 },
-    { kode: "GA07", teks: "Melihat area intim adalah dosa", skor: 2 },
-    { kode: "GA08", teks: "Saya mulai mencari gambar/video vulgar secara berkala", skor: 3 },
-    { kode: "GA09", teks: "Saya senang melihat pria dan wanita tidak berpakaian bersama", skor: 2 },
-    { kode: "GA10", teks: "Saya bersemangat melihat pria dan wanita yang berciuman", skor: 2 },
-    { kode: "GA11", teks: "Sulit buka gadget tanpa buka konten porno", skor: 3 },
-    { kode: "GA12", teks: "Terasa ada yang hilang jika tidak buka video porno", skor: 2 },
-    { kode: "GA13", teks: "Saya menikmati cerita dengan adegan ranjang", skor: 1 },
-    { kode: "GA14", teks: "Saya tertarik melihat area intim pria & wanita", skor: 1 },
-    { kode: "GA15", teks: "Saya bergairah melihat konten vulgar", skor: 2 },
-    { kode: "GA16", teks: "Saya pusing & lemas jika tak lihat porno sehari saja", skor: 2 },
-    { kode: "GA17", teks: "Saya mencari video porno dari berbagai daerah", skor: 2 },
-    { kode: "GA18", teks: "Mendengar desahan saat hubungan badan menyenangkan", skor: 2 },
-    { kode: "GA19", teks: "Dalam sehari saya bisa menonton porno lebih dari 1 kali", skor: 2 },
-    { kode: "GA20", teks: "Normal lihat pornografi setiap hari", skor: 2 },
-    { kode: "GA21", teks: "Video/gambar porno makin terasa biasa saja", skor: 2 },
-    { kode: "GA22", teks: "Saya puas melihat hubungan intim secara langsung", skor: 3 },
-    { kode: "GA23", teks: "Saya eksplorasi berbagai gerakan saat hubungan", skor: 2 },
-    { kode: "GA24", teks: "Banyaknya film porno tak pengaruhi kenikmatan saya", skor: 2 },
-    { kode: "GA25", teks: "Saya bosan hanya lihat film porno", skor: 1 },
-    { kode: "GA26", teks: "Konten porno berputar di imajinasi saya", skor: 2 },
-    { kode: "GA27", teks: "Saya masturbasi untuk memuaskan diri sendiri", skor: 3 },
-    { kode: "GA28", teks: "Saya ingin punya pasangan untuk berhubungan intim", skor: 2 },
-    { kode: "GA29", teks: "Saya ingin beli alat bantu seks", skor: 3 },
-    { kode: "GA30", teks: "Saya habiskan waktu berjam-jam untuk menonton porno", skor: 4 },
-  ];
-
-  const rules = {
-    P01: { nama: "Early Exposure", list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"], ambang: 8 },
-    P02: { nama: "Addiction", list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"], ambang: 9 },
-    P03: { nama: "Escalation", list: ["GA16","GA17","GA18","GA19","GA20"], ambang: 6 },
-    P04: { nama: "Desensitization", list: ["GA21","GA22","GA23","GA24","GA25","GA26"], ambang: 7 },
-    P05: { nama: "Action", list: ["GA27","GA28","GA29","GA30"], ambang: 6 },
-  };
-
-  let current = 0;
-  let answers = {};
-
-  function renderQuestion() {
-    const data = pertanyaan[current];
-    const percent = Math.round((current / pertanyaan.length) * 100);
-    const sisa = pertanyaan.length - current;
-
-    document.getElementById("quiz-box").innerHTML = `
-      <header class="flex justify-between items-center mb-6">
-        <div class="flex items-center space-x-3">
-          <span class="text-xs font-semibold text-white uppercase tracking-widest select-none">PORNOGRAPHY ADDICTION SCREEN</span>
+    <div class="question-text">
+        Saya merasa khawatir jika melihat pornografi akan dimarahi
+    </div>
+    
+    <div class="options">
+        <div class="option">
+            <div class="radio-button"></div>
+            <span>Ya</span>
         </div>
-        <div class="text-right">
-          <p class="text-xs font-semibold text-white">Total test: <span class="font-bold">${percent}% completed</span></p>
-          <div class="w-24 h-1 rounded-full bg-gray-500 mt-1 overflow-hidden">
-            <div class="h-1 bg-gradient-to-r from-purple-500 to-pink-500" style="width:${percent}%"></div>
-          </div>
+        <div class="option">
+            <div class="radio-button"></div>
+            <span>Tidak</span>
         </div>
-      </header>
-      <section class="mb-6 flex justify-between items-center text-gray-400 text-[10px] font-semibold uppercase select-none">
-        <span>${sisa} questions left</span>
-      </section>
-      <p class="text-white text-base leading-relaxed mb-6">${data.teks}</p>
-      <form class="space-y-4">
-        <label class="flex items-center border border-cyan-500 rounded-md p-4 text-white cursor-pointer">
-          <input class="form-radio text-cyan-400" type="radio" name="ans" value="ya" onchange="submitAnswer('ya')">
-          <span class="ml-4">Ya</span>
-        </label>
-        <label class="flex items-center border border-gray-400 rounded-md p-4 text-white cursor-pointer">
-          <input class="form-radio text-cyan-400" type="radio" name="ans" value="tidak" onchange="submitAnswer('tidak')">
-          <span class="ml-4">Tidak</span>
-        </label>
-      </form>
-    `;
-  }
+    </div>
+    
+    <button class="next-button">Next Question</button>
 
-  function submitAnswer(jawaban) {
-    const data = pertanyaan[current];
-    if (jawaban === "ya") {
-      answers[data.kode] = data.skor;
-    } else {
-      answers[data.kode] = 0;
-    }
-
-    current++;
-    if (current < pertanyaan.length) {
-      renderQuestion();
-    } else {
-      tampilkanHasil();
-    }
-  }
-
-  function tampilkanHasil() {
-    let hasil = [];
-    for (let kode in rules) {
-      const rule = rules[kode];
-      const total = rule.list.reduce((sum, k) => sum + (answers[k] || 0), 0);
-      if (total >= rule.ambang) {
-        hasil.push({ kode, nama: rule.nama, skor: total });
-      }
-    }
-
-    let isi = `
-      <div class="text-white text-center">
-        <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
-        <img src="https://storage.googleapis.com/a1aa/image/d3aae1fb-f566-4fd7-6f3e-25b287e00819.jpg" class="rounded-lg mx-auto mb-6" width="280"/>
-    `;
-
-    if (hasil.length === 0) {
-      isi += `<p class="text-lg">Tidak ditemukan indikasi kecanduan signifikan.</p>`;
-    } else {
-      const last = hasil[hasil.length - 1];
-      isi += `<p class="text-lg">Anda terindikasi berada pada tahap <strong>${last.nama}</strong> (${last.kode})</p>`;
-    }
-
-    isi += `
-        <a href="index.html">
-          <button class="mt-6 bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
-        </a>
-      </div>
-    `;
-
-    document.getElementById("quiz-box").innerHTML = isi;
-  }
-
-  // Start quiz
-  renderQuestion();
-</script>
-
+    <script>
+        // JavaScript untuk interaksi
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Hapus selected dari semua opsi
+                document.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // Tambahkan selected ke opsi yang diklik
+                this.classList.add('selected');
+            });
+        });
+    </script>
 </body>
 </html>
