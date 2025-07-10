@@ -122,73 +122,94 @@
     }
 
 function tampilkanHasil() {
-  const hasil = [];
+  let hasil = [];
   for (let kode in rules) {
     const rule = rules[kode];
     const total = rule.list.reduce((sum, k) => sum + (answers[k] || 0), 0);
     if (total >= rule.ambang) {
-      hasil.push({ kode, nama: rule.nama, skor: total });
+      hasil.push({ kode, nama: rule.nama, skor: total, ambang: rule.ambang });
     }
   }
 
-  const tahap = hasil.length > 0 ? hasil[hasil.length - 1] : null;
-
-  let deskripsi = "Tidak ditemukan indikasi kecanduan signifikan.";
-  let saran = "Terus jaga kebiasaan positif dan jauhi paparan konten negatif.";
-  let persen = 0;
-
-  if (tahap) {
-    switch (tahap.kode) {
-      case "P01":
-        deskripsi = "Tahap ini menunjukkan Anda mulai mengenali konten seksual secara tidak sengaja.";
-        saran = "Segera atur filter konten dan perbanyak akses ke konten edukatif.";
-        persen = 25;
-        break;
-      case "P02":
-        deskripsi = "Sudah mulai terlihat gejala ketergantungan ringan terhadap konten vulgar.";
-        saran = "Batasi akses dan isi waktu luang dengan kegiatan positif atau ibadah.";
-        persen = 40;
-        break;
-      case "P03":
-        deskripsi = "Ada peningkatan frekuensi & variasi pencarian konten vulgar.";
-        saran = "Pertimbangkan detoks digital. Coba konsultasi ke orang terpercaya atau mentor.";
-        persen = 60;
-        break;
-      case "P04":
-        deskripsi = "Anda mulai kebal terhadap konten biasa dan ingin mencari yang lebih ekstrem.";
-        saran = "Ini saat yang penting untuk berhenti. Jangan menormalisasi konten yang berbahaya.";
-        persen = 80;
-        break;
-      case "P05":
-        deskripsi = "Tanda bahaya serius. Dorongan kuat untuk melakukan tindakan nyata muncul.";
-        saran = "Segera cari bantuan profesional. Pulih itu mungkin. Anda tidak sendiri.";
-        persen = 100;
-        break;
+  const tahapInfo = {
+    P01: {
+      nama: "Early Exposure",
+      deskripsi: "Tahap awal ketika seseorang mulai terpapar konten seksual, biasanya disertai rasa takut, jijik, atau penasaran.",
+      saran: "Tingkatkan kesadaran, batasi paparan digital, dan dekatkan diri ke lingkungan positif dan religius."
+    },
+    P02: {
+      nama: "Addiction",
+      deskripsi: "Sudah mulai terbentuk kebiasaan menonton konten vulgar dan sulit mengontrol keinginan.",
+      saran: "Hindari pemicu digital, buat rutinitas sehat, dan mulai konsultasi ke mentor/konselor."
+    },
+    P03: {
+      nama: "Escalation",
+      deskripsi: "Konten biasa tidak lagi memuaskan, dan mulai mencari variasi atau konten yang ekstrem.",
+      saran: "Lakukan digital detox, ganti kebiasaan, dan libatkan lingkungan untuk membangun kontrol diri."
+    },
+    P04: {
+      nama: "Desensitization",
+      deskripsi: "Konten ekstrem pun terasa biasa. Rasa bersalah mulai hilang dan merasa itu hal normal.",
+      saran: "Pulihkan nurani lewat bimbingan spiritual, komunitas sehat, dan terapi emosional."
+    },
+    P05: {
+      nama: "Action",
+      deskripsi: "Dorongan beralih ke tindakan nyata, seperti membeli alat bantu atau mencari pengalaman langsung.",
+      saran: "Segera dapatkan pertolongan profesional dan pendampingan spiritual. Ini tahap serius."
     }
-  }
+  };
 
-  const grafik = `
-    <div class="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden">
-      <div class="h-4 rounded-full bg-gradient-to-r from-green-400 to-pink-500" style="width: ${persen}%; transition: width 0.5s ease;"></div>
-    </div>
-    <p class="text-white text-sm mb-4 text-center font-semibold">Tingkat risiko kecanduan: ${persen}%</p>
+  let isi = `
+    <div class="text-white text-center">
+      <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
   `;
 
-  document.getElementById("quiz-box").innerHTML = `
-    <div class="max-w-xl mx-auto bg-[#0F6B60] p-8 rounded-xl shadow-lg text-center animate-fadeIn">
-      <h2 class="text-2xl font-bold text-white mb-4">Hasil Diagnosa</h2>
-      ${tahap ? grafik : '<img src="https://storage.googleapis.com/a1aa/image/d3aae1fb-f566-4fd7-6f3e-25b287e00819.jpg" class="rounded-lg mx-auto mb-4" width="180"/>'}
-      <p class="text-lg text-white font-semibold mb-2">${tahap ? `Anda terindikasi berada pada tahap <span class="text-pink-300">${tahap.nama}</span> (${tahap.kode})` : deskripsi}</p>
-      <p class="text-sm text-gray-200 mb-6 leading-relaxed">${deskripsi}</p>
-      <div class="bg-[#05594f] text-sm rounded-md p-4 text-white mb-6 border border-cyan-400">
-        <i class="fas fa-lightbulb mr-2 text-yellow-300"></i>${saran}
+  if (hasil.length === 0) {
+    isi += `
+      <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
+        <h3 class="text-lg font-semibold mb-4 text-white">Tidak ditemukan indikasi kecanduan signifikan.</h3>
+        <p class="text-sm mb-4 text-gray-200">Terus jaga kebiasaan positif dan jauhi paparan konten negatif.</p>
+        <div class="mt-4">
+          <a href="index.html">
+            <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
+          </a>
+        </div>
       </div>
-      <a href="index.html">
-        <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold w-full sm:w-auto">Kembali ke Dashboard</button>
-      </a>
-    </div>
-  `;
+    `;
+  } else {
+    const last = hasil[hasil.length - 1];
+    const info = tahapInfo[last.kode];
+    const persen = Math.min(100, Math.round((last.skor / (last.ambang * 1.5)) * 100)); // Skala kasar
+
+    isi += `
+      <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
+        <h3 class="text-lg font-semibold mb-4 text-white">
+          Anda terindikasi berada pada tahap <span class="font-bold text-pink-300">${info.nama}</span> (${last.kode})
+        </h3>
+
+        <div class="w-full bg-[#04423A] rounded-full h-4 mb-4 overflow-hidden">
+          <div class="bg-gradient-to-r from-yellow-400 to-red-500 h-4" style="width:${persen}%"></div>
+        </div>
+        <p class="text-sm text-white mb-1">Tingkat Kecanduan: <span class="font-bold">${persen}%</span></p>
+
+        <div class="w-full bg-[#04423A] p-4 rounded-md mb-4 text-left">
+          <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Deskripsi:</span><br>${info.deskripsi}</p>
+          <p class="text-sm text-gray-200"><span class="font-bold text-white">Saran:</span><br>${info.saran}</p>
+        </div>
+
+        <div class="mt-4">
+          <a href="index.html">
+            <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  isi += `</div>`;
+  document.getElementById("quiz-box").innerHTML = isi;
 }
+
     renderQuestion();
   </script>
 </body>
