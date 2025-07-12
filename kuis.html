@@ -14,8 +14,9 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#03302B] flex items-center justify-center px-4">
-  <div class="w-full max-w-xl bg-[#0F6B60] rounded-lg shadow-md p-6 md:p-10 text-white" id="quiz-box"></div>  <script>
+<body class="min-h-screen bg-[#03302B] flex items-center justify-center px-4">  <div class="w-full max-w-xl bg-[#0F6B60] rounded-lg shadow-md p-6 md:p-10 text-white" id="quiz-box">
+    <!-- Dynamic content here -->
+  </div>  <script>
     const pertanyaan = [
       { kode: "GA01", teks: "Saya merasa gemetar saat melihat adegan ranjang", skor: 2 },
       { kode: "GA02", teks: "Pertama kali dalam hidup saya melihat pria dan wanita tidak berpakaian", skor: 2 },
@@ -50,11 +51,11 @@
     ];
 
     const rules = {
-      P01: { nama: "Early Exposure", list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"], ambang: 6 },
-      P02: { nama: "Addiction", list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"], ambang: 7 },
-      P03: { nama: "Escalation", list: ["GA16","GA17","GA18","GA19","GA20"], ambang: 5 },
-      P04: { nama: "Desensitization", list: ["GA21","GA22","GA23","GA24","GA25","GA26"], ambang: 6 },
-      P05: { nama: "Action", list: ["GA27","GA28","GA29","GA30"], ambang: 5 },
+      P01: { nama: "Early Exposure", list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"], ambang: 8 },
+      P02: { nama: "Addiction", list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"], ambang: 9 },
+      P03: { nama: "Escalation", list: ["GA16","GA17","GA18","GA19","GA20"], ambang: 6 },
+      P04: { nama: "Desensitization", list: ["GA21","GA22","GA23","GA24","GA25","GA26"], ambang: 7 },
+      P05: { nama: "Action", list: ["GA27","GA28","GA29","GA30"], ambang: 6 },
     };
 
     let current = 0;
@@ -64,28 +65,8 @@
       const data = pertanyaan[current];
       const percent = Math.round((current / pertanyaan.length) * 100);
       const sisa = pertanyaan.length - current;
-      document.getElementById("quiz-box").innerHTML = `
-        <h2 class="text-center text-2xl font-bold mb-2">PORNOGRAPHY ADDICTION SCREEN</h2>
-        <p class="text-center text-sm mb-4">Total test: ${percent}% completed</p>
-        <div class="w-full bg-[#05594f] rounded-full h-3 mb-6 overflow-hidden">
-          <div class="h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-500" style="width:${percent}%"></div>
-        </div>
-        <p class="text-center text-xs text-gray-200 mb-6">${sisa} Questions Left</p>
-        <div class="bg-[#05594f] p-4 rounded-md mb-6">
-          <p class="text-lg">${data.teks}</p>
-        </div>
-        <form id="form-ans" class="space-y-4">
-          <label class="radio-btn flex items-center gap-3 bg-[#06695f] p-3 rounded-md cursor-pointer hover:bg-[#07877a]">
-            <input type="radio" name="ans" value="ya" onchange="submitAnswer('ya')">
-            <span>Ya</span>
-          </label>
-          <label class="radio-btn flex items-center gap-3 bg-[#06695f] p-3 rounded-md cursor-pointer hover:bg-[#07877a]">
-            <input type="radio" name="ans" value="tidak" onchange="submitAnswer('tidak')">
-            <span>Tidak</span>
-          </label>
-        </form>
-        ${current > 0 ? `<button onclick="goBack()" class="mt-6 w-full bg-gray-600 hover:bg-gray-700 transition-all text-white py-3 rounded-md font-semibold">Pertanyaan Sebelumnya</button>` : ``}
-      `;
+
+      document.getElementById("quiz-box").innerHTML = `...`;
     }
 
     function submitAnswer(jawaban) {
@@ -116,76 +97,8 @@
         }
       }
 
-      const tahapInfo = {
-        P01: {
-          nama: "Early Exposure",
-          deskripsi: "Tahap awal ketika seseorang mulai terpapar konten seksual, biasanya disertai rasa takut, jijik, atau penasaran.",
-          saran: "Tingkatkan kesadaran, batasi paparan digital, dan dekatkan diri ke lingkungan positif dan religius."
-        },
-        P02: {
-          nama: "Addiction",
-          deskripsi: "Sudah mulai terbentuk kebiasaan menonton konten vulgar dan sulit mengontrol keinginan.",
-          saran: "Hindari pemicu digital, buat rutinitas sehat, dan mulai konsultasi ke mentor/konselor."
-        },
-        P03: {
-          nama: "Escalation",
-          deskripsi: "Konten biasa tidak lagi memuaskan, dan mulai mencari variasi atau konten yang ekstrem.",
-          saran: "Lakukan digital detox, ganti kebiasaan, dan libatkan lingkungan untuk membangun kontrol diri."
-        },
-        P04: {
-          nama: "Desensitization",
-          deskripsi: "Konten ekstrem pun terasa biasa. Rasa bersalah mulai hilang dan merasa itu hal normal.",
-          saran: "Pulihkan nurani lewat bimbingan spiritual, komunitas sehat, dan terapi emosional."
-        },
-        P05: {
-          nama: "Action",
-          deskripsi: "Dorongan beralih ke tindakan nyata, seperti membeli alat bantu atau mencari pengalaman langsung.",
-          saran: "Segera dapatkan pertolongan profesional dan pendampingan spiritual. Ini tahap serius."
-        }
-      };
-
-      let isi = `<div class="text-white text-center"><h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>`;
-
-      if (hasil.length === 0) {
-        isi += `
-          <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
-            <h3 class="text-lg font-semibold mb-4 text-white">Tidak ditemukan indikasi kecanduan signifikan.</h3>
-            <p class="text-sm mb-4 text-gray-200">Terus jaga kebiasaan positif dan jauhi paparan konten negatif.</p>
-            <div class="mt-4">
-              <a href="index.html">
-                <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
-              </a>
-            </div>
-          </div>
-        `;
-      } else {
-        const last = hasil[hasil.length - 1];
-        const info = tahapInfo[last.kode];
-        const persen = Math.min(100, Math.round((last.skor / (last.ambang * 1.5)) * 100));
-
-        isi += `
-          <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
-            <h3 class="text-lg font-semibold mb-4 text-white">
-              Anda terindikasi berada pada tahap <span class="font-bold text-pink-300">${info.nama}</span> (${last.kode})
-            </h3>
-            <div class="w-full bg-[#04423A] rounded-full h-4 mb-4 overflow-hidden">
-              <div class="bg-gradient-to-r from-yellow-400 to-red-500 h-4" style="width:${persen}%"></div>
-            </div>
-            <p class="text-sm text-white mb-1">Tingkat Kecanduan: <span class="font-bold">${persen}%</span></p>
-            <div class="w-full bg-[#04423A] p-4 rounded-md mb-4 text-left">
-              <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Deskripsi:</span><br>${info.deskripsi}</p>
-              <p class="text-sm text-gray-200"><span class="font-bold text-white">Saran:</span><br>${info.saran}</p>
-            </div>
-            <div class="mt-4">
-              <a href="index.html">
-                <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
-              </a>
-            </div>
-          </div>
-        `;
-      }
-      isi += `</div>`;
-      document.getElementById("quiz-box").innerHTML = isi;
+      // Tampilkan hasil di halaman
+      document.getElementById("quiz-box").innerHTML = JSON.stringify(hasil, null, 2);
     }
 
     renderQuestion();
