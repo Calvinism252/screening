@@ -22,48 +22,51 @@
   </div>
 
   <script>
+    // Pertanyaan: hanya menyimpan kode & teks (tidak ada skor)
     const pertanyaan = [
-      { kode: "GA01", teks: "Saya merasa gemetar saat melihat adegan ranjang", skor: 2 },
-      { kode: "GA02", teks: "Pertama kali dalam hidup saya melihat pria dan wanita tidak berpakaian", skor: 2 },
-      { kode: "GA03", teks: "Saya merasa mual saat melihat pria dan wanita berciuman", skor: 2 },
-      { kode: "GA04", teks: "Saya merasa khawatir jika melihat pornografi akan dimarahi", skor: 2 },
-      { kode: "GA05", teks: "Bagi saya melihat pria dan wanita tidak berpakaian adalah hal yang wajar", skor: 2 },
-      { kode: "GA06", teks: "Saya menutup mata ketika tiba-tiba layar memperlihatkan video vulgar", skor: 2 },
-      { kode: "GA07", teks: "Melihat area intim adalah dosa", skor: 2 },
-      { kode: "GA08", teks: "Saya mulai mencari gambar/video vulgar secara berkala", skor: 3 },
-      { kode: "GA09", teks: "Saya senang melihat pria dan wanita tidak berpakaian bersama", skor: 2 },
-      { kode: "GA10", teks: "Saya bersemangat melihat pria dan wanita yang berciuman", skor: 2 },
-      { kode: "GA11", teks: "Sulit buka gadget tanpa buka konten porno", skor: 3 },
-      { kode: "GA12", teks: "Terasa ada yang hilang jika tidak buka video porno", skor: 2 },
-      { kode: "GA13", teks: "Saya menikmati cerita dengan adegan ranjang", skor: 1 },
-      { kode: "GA14", teks: "Saya tertarik melihat area intim pria & wanita", skor: 1 },
-      { kode: "GA15", teks: "Saya bergairah melihat konten vulgar", skor: 2 },
-      { kode: "GA16", teks: "Saya pusing & lemas jika tak lihat porno sehari saja", skor: 2 },
-      { kode: "GA17", teks: "Saya mencari video porno dari berbagai daerah", skor: 2 },
-      { kode: "GA18", teks: "Mendengar desahan saat hubungan badan menyenangkan", skor: 2 },
-      { kode: "GA19", teks: "Dalam sehari saya bisa menonton porno lebih dari 1 kali", skor: 2 },
-      { kode: "GA20", teks: "Normal lihat pornografi setiap hari", skor: 2 },
-      { kode: "GA21", teks: "Video/gambar porno makin terasa biasa saja", skor: 2 },
-      { kode: "GA22", teks: "Saya puas melihat hubungan intim secara langsung", skor: 3 },
-      { kode: "GA23", teks: "Saya eksplorasi berbagai gerakan saat hubungan", skor: 2 },
-      { kode: "GA24", teks: "Banyaknya film porno tak pengaruhi kenikmatan saya", skor: 2 },
-      { kode: "GA25", teks: "Saya bosan hanya lihat film porno", skor: 1 },
-      { kode: "GA26", teks: "Konten porno berputar di imajinasi saya", skor: 2 },
-      { kode: "GA27", teks: "Saya masturbasi untuk memuaskan diri sendiri", skor: 3 },
-      { kode: "GA28", teks: "Saya ingin punya pasangan untuk berhubungan intim", skor: 2 },
-      { kode: "GA29", teks: "Saya ingin beli alat bantu seks", skor: 3 },
-      { kode: "GA30", teks: "Saya habiskan waktu berjam-jam untuk menonton porno", skor: 4 },
+      { kode: "GA01", teks: "Saya merasa gemetar saat melihat adegan ranjang" },
+      { kode: "GA02", teks: "Pertama kali dalam hidup saya melihat pria dan wanita tidak berpakaian" },
+      { kode: "GA03", teks: "Saya merasa mual saat melihat pria dan wanita berciuman" },
+      { kode: "GA04", teks: "Saya merasa khawatir jika melihat pornografi akan dimarahi" },
+      { kode: "GA05", teks: "Bagi saya melihat pria dan wanita tidak berpakaian adalah hal yang wajar" },
+      { kode: "GA06", teks: "Saya menutup mata ketika tiba-tiba layar memperlihatkan video vulgar" },
+      { kode: "GA07", teks: "Melihat area intim adalah dosa" },
+      { kode: "GA08", teks: "Saya mulai mencari gambar/video vulgar secara berkala" },
+      { kode: "GA09", teks: "Saya senang melihat pria dan wanita tidak berpakaian bersama" },
+      { kode: "GA10", teks: "Saya bersemangat melihat pria dan wanita yang berciuman" },
+      { kode: "GA11", teks: "Sulit buka gadget tanpa buka konten porno" },
+      { kode: "GA12", teks: "Terasa ada yang hilang jika tidak buka video porno" },
+      { kode: "GA13", teks: "Saya menikmati cerita dengan adegan ranjang" },
+      { kode: "GA14", teks: "Saya tertarik melihat area intim pria & wanita" },
+      { kode: "GA15", teks: "Saya bergairah melihat konten vulgar" },
+      { kode: "GA16", teks: "Saya pusing & lemas jika tak lihat porno sehari saja" },
+      { kode: "GA17", teks: "Saya mencari video porno dari berbagai daerah" },
+      { kode: "GA18", teks: "Mendengar desahan saat hubungan badan menyenangkan" },
+      { kode: "GA19", teks: "Dalam sehari saya bisa menonton porno lebih dari 1 kali" },
+      { kode: "GA20", teks: "Normal lihat pornografi setiap hari" },
+      { kode: "GA21", teks: "Video/gambar porno makin terasa biasa saja" },
+      { kode: "GA22", teks: "Saya puas melihat hubungan intim secara langsung" },
+      { kode: "GA23", teks: "Saya eksplorasi berbagai gerakan saat hubungan" },
+      { kode: "GA24", teks: "Banyaknya film porno tak pengaruhi kenikmatan saya" },
+      { kode: "GA25", teks: "Saya bosan hanya lihat film porno" },
+      { kode: "GA26", teks: "Konten porno berputar di imajinasi saya" },
+      { kode: "GA27", teks: "Saya masturbasi untuk memuaskan diri sendiri" },
+      { kode: "GA28", teks: "Saya ingin punya pasangan untuk berhubungan intim" },
+      { kode: "GA29", teks: "Saya ingin beli alat bantu seks" },
+      { kode: "GA30", teks: "Saya habiskan waktu berjam-jam untuk menonton porno" },
     ];
 
+    // Rules: hanya daftar gejala per kategori (tanpa ambang)
     const rules = {
-      P01: { nama: "Early Exposure", list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"], ambang: 8 },
-      P02: { nama: "Addiction", list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"], ambang: 9 },
-      P03: { nama: "Escalation", list: ["GA16","GA17","GA18","GA19","GA20"], ambang: 6 },
-      P04: { nama: "Desensitization", list: ["GA21","GA22","GA23","GA24","GA25","GA26"], ambang: 7 },
-      P05: { nama: "Action", list: ["GA27","GA28","GA29","GA30"], ambang: 6 },
+      P01: { nama: "Early Exposure", list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"] },
+      P02: { nama: "Addiction", list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"] },
+      P03: { nama: "Escalation", list: ["GA16","GA17","GA18","GA19","GA20"] },
+      P04: { nama: "Desensitization", list: ["GA21","GA22","GA23","GA24","GA25","GA26"] },
+      P05: { nama: "Action", list: ["GA27","GA28","GA29","GA30"] },
     };
 
     let current = 0;
+    // answers menyimpan boolean true/false untuk setiap kode gejala
     let answers = {};
 
     function renderQuestion() {
@@ -104,7 +107,8 @@
 
     function submitAnswer(jawaban) {
       const data = pertanyaan[current];
-      answers[data.kode] = (jawaban === "ya") ? data.skor : 0;
+      // simpan boolean: true jika 'ya', false jika 'tidak'
+      answers[data.kode] = (jawaban === "ya");
 
       current++;
       if (current < pertanyaan.length) {
@@ -121,95 +125,116 @@
       }
     }
 
-function tampilkanHasil() {
-  let hasil = [];
-  for (let kode in rules) {
-    const rule = rules[kode];
-    const total = rule.list.reduce((sum, k) => sum + (answers[k] || 0), 0);
-    if (total >= rule.ambang) {
-      hasil.push({ kode, nama: rule.nama, skor: total, ambang: rule.ambang });
+    function tampilkanHasil() {
+      // Hitung jumlah gejala "YA" per rule (hybrid mayoritas)
+      let hasil = [];
+      for (let kode in rules) {
+        const rule = rules[kode];
+        // jumlah gejala terpenuhi (count of true)
+        const countYes = rule.list.reduce((cnt, k) => cnt + (answers[k] === true ? 1 : 0), 0);
+        // daftar gejala terpenuhi untuk explanation
+        const matched = rule.list.filter(k => answers[k] === true);
+        hasil.push({ kode, nama: rule.nama, count: countYes, matched, totalPremis: rule.list.length });
+      }
+
+      // tentukan mayoritas (max count)
+      const maxCount = Math.max(...hasil.map(h => h.count));
+      // jika tidak ada gejala sama sekali
+      if (maxCount === 0) {
+        const isi = `
+          <div class="text-white text-center">
+            <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
+            <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
+              <h3 class="text-lg font-semibold mb-4 text-white">Tidak ditemukan indikasi kecanduan signifikan.</h3>
+              <p class="text-sm mb-4 text-gray-200">Terus jaga kebiasaan positif dan jauhi paparan konten negatif.</p>
+              <div class="mt-4">
+                <a href="index.html">
+                  <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        document.getElementById("quiz-box").innerHTML = isi;
+        return;
+      }
+
+      // ambil kandidat yang memiliki count == maxCount
+      const candidates = hasil.filter(h => h.count === maxCount);
+
+      // pilih kandidat: jika lebih dari satu, pilih yang kode P lebih tinggi (P05 > P04 > ...)
+      let chosen;
+      if (candidates.length === 1) {
+        chosen = candidates[0];
+      } else {
+        candidates.sort((a, b) => {
+          const na = parseInt(a.kode.slice(1));
+          const nb = parseInt(b.kode.slice(1));
+          return nb - na; // descending -> pilih yang lebih tinggi
+        });
+        chosen = candidates[0];
+      }
+
+      // Info teks tahap (mapping tetap sama)
+      const tahapInfo = {
+        P01: {
+          nama: "Early Exposure",
+          deskripsi: "Tahap awal ketika seseorang mulai terpapar konten seksual, biasanya disertai rasa takut, jijik, atau penasaran.",
+          saran: "Tingkatkan kesadaran, batasi paparan digital, dan dekatkan diri ke lingkungan positif dan religius."
+        },
+        P02: {
+          nama: "Addiction",
+          deskripsi: "Sudah mulai terbentuk kebiasaan menonton konten vulgar dan sulit mengontrol keinginan.",
+          saran: "Hindari pemicu digital, buat rutinitas sehat, dan mulai konsultasi ke mentor/konselor."
+        },
+        P03: {
+          nama: "Escalation",
+          deskripsi: "Konten biasa tidak lagi memuaskan, dan mulai mencari variasi atau konten yang ekstrem.",
+          saran: "Lakukan digital detox, ganti kebiasaan, dan libatkan lingkungan untuk membangun kontrol diri."
+        },
+        P04: {
+          nama: "Desensitization",
+          deskripsi: "Konten ekstrem pun terasa biasa. Rasa bersalah mulai hilang dan merasa itu hal normal.",
+          saran: "Pulihkan nurani lewat bimbingan spiritual, komunitas sehat, dan terapi emosional."
+        },
+        P05: {
+          nama: "Action",
+          deskripsi: "Dorongan beralih ke tindakan nyata, seperti membeli alat bantu atau mencari pengalaman langsung.",
+          saran: "Segera dapatkan pertolongan profesional dan pendampingan spiritual. Ini tahap serius."
+        }
+      };
+
+      const info = tahapInfo[chosen.kode];
+      const isi = `
+        <div class="text-white text-center">
+          <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
+
+          <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
+            <h3 class="text-lg font-semibold mb-2 text-white">
+              Anda terindikasi berada pada tahap <span class="font-bold text-pink-300">${info.nama}</span> (${chosen.kode})
+            </h3>
+
+            <p class="text-sm text-white mb-2">Jumlah gejala terpenuhi: <span class="font-bold">${chosen.count}</span> dari ${chosen.totalPremis} gejala pada kategori ini.</p>
+
+            <div class="w-full bg-[#04423A] p-4 rounded-md mb-4 text-left">
+              <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Deskripsi:</span><br>${info.deskripsi}</p>
+              <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Saran:</span><br>${info.saran}</p>
+              <p class="text-sm text-gray-200"><span class="font-bold text-white">Gejala yang terpenuhi:</span><br>${chosen.matched.length ? chosen.matched.join(", ") : "—"}</p>
+            </div>
+
+            <div class="mt-4">
+              <a href="index.html">
+                <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("quiz-box").innerHTML = isi;
     }
-  }
 
-  const tahapInfo = {
-    P01: {
-      nama: "Early Exposure",
-      deskripsi: "Tahap awal ketika seseorang mulai terpapar konten seksual, biasanya disertai rasa takut, jijik, atau penasaran.",
-      saran: "Tingkatkan kesadaran, batasi paparan digital, dan dekatkan diri ke lingkungan positif dan religius."
-    },
-    P02: {
-      nama: "Addiction",
-      deskripsi: "Sudah mulai terbentuk kebiasaan menonton konten vulgar dan sulit mengontrol keinginan.",
-      saran: "Hindari pemicu digital, buat rutinitas sehat, dan mulai konsultasi ke mentor/konselor."
-    },
-    P03: {
-      nama: "Escalation",
-      deskripsi: "Konten biasa tidak lagi memuaskan, dan mulai mencari variasi atau konten yang ekstrem.",
-      saran: "Lakukan digital detox, ganti kebiasaan, dan libatkan lingkungan untuk membangun kontrol diri."
-    },
-    P04: {
-      nama: "Desensitization",
-      deskripsi: "Konten ekstrem pun terasa biasa. Rasa bersalah mulai hilang dan merasa itu hal normal.",
-      saran: "Pulihkan nurani lewat bimbingan spiritual, komunitas sehat, dan terapi emosional."
-    },
-    P05: {
-      nama: "Action",
-      deskripsi: "Dorongan beralih ke tindakan nyata, seperti membeli alat bantu atau mencari pengalaman langsung.",
-      saran: "Segera dapatkan pertolongan profesional dan pendampingan spiritual. Ini tahap serius."
-    }
-  };
-
-  let isi = `
-    <div class="text-white text-center">
-      <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
-  `;
-
-  if (hasil.length === 0) {
-    isi += `
-      <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
-        <h3 class="text-lg font-semibold mb-4 text-white">Tidak ditemukan indikasi kecanduan signifikan.</h3>
-        <p class="text-sm mb-4 text-gray-200">Terus jaga kebiasaan positif dan jauhi paparan konten negatif.</p>
-        <div class="mt-4">
-          <a href="index.html">
-            <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
-          </a>
-        </div>
-      </div>
-    `;
-  } else {
-    const last = hasil[hasil.length - 1];
-    const info = tahapInfo[last.kode];
-    const persen = Math.min(100, Math.round((last.skor / (last.ambang * 1.5)) * 100)); // Skala kasar
-
-    isi += `
-      <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
-        <h3 class="text-lg font-semibold mb-4 text-white">
-          Anda terindikasi berada pada tahap <span class="font-bold text-pink-300">${info.nama}</span> (${last.kode})
-        </h3>
-
-        <div class="w-full bg-[#04423A] rounded-full h-4 mb-4 overflow-hidden">
-          <div class="bg-gradient-to-r from-yellow-400 to-red-500 h-4" style="width:${persen}%"></div>
-        </div>
-        <p class="text-sm text-white mb-1">Tingkat Kecanduan: <span class="font-bold">${persen}%</span></p>
-
-        <div class="w-full bg-[#04423A] p-4 rounded-md mb-4 text-left">
-          <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Deskripsi:</span><br>${info.deskripsi}</p>
-          <p class="text-sm text-gray-200"><span class="font-bold text-white">Saran:</span><br>${info.saran}</p>
-        </div>
-
-        <div class="mt-4">
-          <a href="index.html">
-            <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
-          </a>
-        </div>
-      </div>
-    `;
-  }
-
-  isi += `</div>`;
-  document.getElementById("quiz-box").innerHTML = isi;
-}
-
+    // Start
     renderQuestion();
   </script>
 </body>
