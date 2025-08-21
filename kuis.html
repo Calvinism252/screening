@@ -155,6 +155,14 @@
     const isi = `
       <div class="text-white text-center">
         <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
+        <div class="w-full mb-4">
+  <div class="w-full bg-[#04423A] rounded-full h-6">
+    <div class="h-6 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500"
+         style="width: ${persentase}%;">
+    </div>
+  </div>
+  <p class="text-white text-sm mt-2">Tingkat Kecanduan: <span class="font-bold">${persentase}%</span></p>
+</div>
         <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
           <h3 class="text-lg font-semibold mb-4 text-white">Tidak ditemukan indikasi kecanduan signifikan.</h3>
           <p class="text-sm mb-4 text-gray-200">Terus jaga kebiasaan positif dan jauhi paparan konten negatif.</p>
@@ -209,6 +217,8 @@
   };
 
   const info = tahapInfo[chosen.kode];
+     // Hitung persentase gejala terpenuhi
+const persentase = ((chosen.count / chosen.totalPremis) * 100).toFixed(0);
     // Array urutan tahap
   const urutanTahap = ["P01","P02","P03","P04","P05"];
 
@@ -249,6 +259,7 @@
   </script>
 </body>
 </html>
+
 
 
 
