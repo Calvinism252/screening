@@ -22,41 +22,41 @@
   </div>
 
   <script>
-    // Pertanyaan: hanya menyimpan kode & teks (tidak ada skor)
+    // Pertanyaan
     const pertanyaan = [
-    { kode: "GA01", teks: "Apakah Anda merasa gemetar saat melihat adegan ranjang?" },
-    { kode: "GA02", teks: "Apakah ini pertama kali Anda melihat pria dan wanita tidak berpakaian?" },
-    { kode: "GA03", teks: "Apakah Anda merasa mual saat melihat pria dan wanita berciuman?" },
-    { kode: "GA04", teks: "Apakah Anda merasa khawatir jika melihat pornografi akan dimarahi?" },
-    { kode: "GA05", teks: "Apakah menurut Anda pria dan wanita tidak berpakaian di kamar adalah hal yang wajar?" },
-    { kode: "GA06", teks: "Apakah Anda menutup mata ketika tiba-tiba layar gadget memperlihatkan video vulgar?" },
-    { kode: "GA07", teks: "Apakah menurut Anda melihat area intim pria maupun wanita adalah dosa?" },
-    { kode: "GA08", teks: "Apakah Anda secara berkala mencari gambar/video vulgar?" },
-    { kode: "GA09", teks: "Apakah Anda merasa senang saat melihat pria dan wanita tidak berpakaian bersama?" },
-    { kode: "GA10", teks: "Apakah Anda merasa bersemangat melihat pria dan wanita berciuman?" },
-    { kode: "GA11", teks: "Apakah sulit bagi Anda membuka gadget tanpa membuka gambar porno?" },
-    { kode: "GA12", teks: "Apakah Anda merasa ada yang hilang jika tidak membuka gambar/video porno?" },
-    { kode: "GA13", teks: "Apakah Anda menikmati cerita romansa yang menceritakan adegan ranjang?" },
-    { kode: "GA14", teks: "Apakah Anda tertarik melihat adegan intim pria dan wanita?" },
-    { kode: "GA15", teks: "Apakah Anda merasa bergairah saat melihat video/gambar vulgar?" },
-    { kode: "GA16", teks: "Apakah Anda merasa pusing/tidak bersemangat jika tidak melihat video porno dalam sehari?" },
-    { kode: "GA17", teks: "Apakah Anda berusaha mencari gambar/video porno dari berbagai sumber/daerah?" },
-    { kode: "GA18", teks: "Apakah Anda merasa mendengarkan desahan orang berhubungan badan itu menyenangkan?" },
-    { kode: "GA19", teks: "Apakah dalam sehari Anda bisa melihat konten pornografi lebih dari satu kali?" },
-    { kode: "GA20", teks: "Apakah menurut Anda wajar jika semua orang melihat pornografi setiap hari?" },
-    { kode: "GA21", teks: "Apakah Anda merasa video/gambar porno kurang menarik?" },
-    { kode: "GA22", teks: "Apakah Anda merasa puas hanya dengan melihat orang berhubungan intim secara langsung?" },
-    { kode: "GA23", teks: "Apakah Anda mengekplorasi berbagai gerakan saat berhubungan badan?" },
-    { kode: "GA24", teks: "Apakah jumlah film porno yang dilihat tidak lagi memengaruhi kepuasan Anda?" },
-    { kode: "GA25", teks: "Apakah Anda merasa bosan hanya menonton film porno?" },
-    { kode: "GA26", teks: "Apakah gambar/film porno hanya berputar-putar di imajinasi Anda?" },
-    { kode: "GA27", teks: "Apakah Anda melakukan onani/masturbasi untuk memuaskan diri sendiri?" },
-    { kode: "GA28", teks: "Apakah Anda ingin memiliki pasangan untuk berhubungan intim?" },
-    { kode: "GA29", teks: "Apakah Anda ingin membeli alat bantu seks untuk memenuhi kebutuhan seksual?" },
-    { kode: "GA30", teks: "Apakah Anda sering menghabiskan waktu berjam-jam menonton pornografi sehingga mengorbankan aktivitas lain?" },
+      { kode: "GA01", teks: "Apakah Anda merasa gemetar saat melihat adegan ranjang?" },
+      { kode: "GA02", teks: "Apakah ini pertama kali Anda melihat pria dan wanita tidak berpakaian?" },
+      { kode: "GA03", teks: "Apakah Anda merasa mual saat melihat pria dan wanita berciuman?" },
+      { kode: "GA04", teks: "Apakah Anda merasa khawatir jika melihat pornografi akan dimarahi?" },
+      { kode: "GA05", teks: "Apakah menurut Anda pria dan wanita tidak berpakaian di kamar adalah hal yang wajar?" },
+      { kode: "GA06", teks: "Apakah Anda menutup mata ketika tiba-tiba layar gadget memperlihatkan video vulgar?" },
+      { kode: "GA07", teks: "Apakah menurut Anda melihat area intim pria maupun wanita adalah dosa?" },
+      { kode: "GA08", teks: "Apakah Anda secara berkala mencari gambar/video vulgar?" },
+      { kode: "GA09", teks: "Apakah Anda merasa senang saat melihat pria dan wanita tidak berpakaian bersama?" },
+      { kode: "GA10", teks: "Apakah Anda merasa bersemangat melihat pria dan wanita berciuman?" },
+      { kode: "GA11", teks: "Apakah sulit bagi Anda membuka gadget tanpa membuka gambar porno?" },
+      { kode: "GA12", teks: "Apakah Anda merasa ada yang hilang jika tidak membuka gambar/video porno?" },
+      { kode: "GA13", teks: "Apakah Anda menikmati cerita romansa yang menceritakan adegan ranjang?" },
+      { kode: "GA14", teks: "Apakah Anda tertarik melihat adegan intim pria dan wanita?" },
+      { kode: "GA15", teks: "Apakah Anda merasa bergairah saat melihat video/gambar vulgar?" },
+      { kode: "GA16", teks: "Apakah Anda merasa pusing/tidak bersemangat jika tidak melihat video porno dalam sehari?" },
+      { kode: "GA17", teks: "Apakah Anda berusaha mencari gambar/video porno dari berbagai sumber/daerah?" },
+      { kode: "GA18", teks: "Apakah Anda merasa mendengarkan desahan orang berhubungan badan itu menyenangkan?" },
+      { kode: "GA19", teks: "Apakah dalam sehari Anda bisa melihat konten pornografi lebih dari satu kali?" },
+      { kode: "GA20", teks: "Apakah menurut Anda wajar jika semua orang melihat pornografi setiap hari?" },
+      { kode: "GA21", teks: "Apakah Anda merasa video/gambar porno kurang menarik?" },
+      { kode: "GA22", teks: "Apakah Anda merasa puas hanya dengan melihat orang berhubungan intim secara langsung?" },
+      { kode: "GA23", teks: "Apakah Anda mengekplorasi berbagai gerakan saat berhubungan badan?" },
+      { kode: "GA24", teks: "Apakah jumlah film porno yang dilihat tidak lagi memengaruhi kepuasan Anda?" },
+      { kode: "GA25", teks: "Apakah Anda merasa bosan hanya menonton film porno?" },
+      { kode: "GA26", teks: "Apakah gambar/film porno hanya berputar-putar di imajinasi Anda?" },
+      { kode: "GA27", teks: "Apakah Anda melakukan onani/masturbasi untuk memuaskan diri sendiri?" },
+      { kode: "GA28", teks: "Apakah Anda ingin memiliki pasangan untuk berhubungan intim?" },
+      { kode: "GA29", teks: "Apakah Anda ingin membeli alat bantu seks untuk memenuhi kebutuhan seksual?" },
+      { kode: "GA30", teks: "Apakah Anda sering menghabiskan waktu berjam-jam menonton pornografi sehingga mengorbankan aktivitas lain?" },
     ];
 
-    // Rules:
+    // Rules
     const rules = {
       P01: { nama: "Early Exposure", list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"] },
       P02: { nama: "Addiction", list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"] },
@@ -66,8 +66,160 @@
     };
 
     let current = 0;
-    // answers menyimpan boolean true/false untuk setiap kode gejala
     let answers = {};
+
+    function renderQuestion() {
+      const data = pertanyaan[current];
+      const percent = Math.round((current / pertanyaan.length) * 100);
+      const sisa = pertanyaan.length - current;
+
+      document.getElementById("quiz-box").innerHTML = `
+        <h2 class="text-center text-2xl font-bold mb-2">PORNOGRAPHY ADDICTION SCREEN</h2>
+        <p class="text-center text-sm mb-4">Total test: ${percent}% completed</p>
+
+        <div class="w-full bg-[#05594f] rounded-full h-3 mb-6 overflow-hidden">
+          <div class="h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-500" style="width:${percent}%"></div>
+        </div>
+
+        <p class="text-center text-xs text-gray-200 mb-6">${sisa} Questions Left</p>
+
+        <div class="bg-[#05594f] p-4 rounded-md mb-6">
+          <p class="text-lg">${data.teks}</p>
+        </div>
+
+        <form id="form-ans" class="space-y-4">
+          <label class="radio-btn flex items-center gap-3 bg-[#06695f] p-3 rounded-md cursor-pointer hover:bg-[#07877a]">
+            <input type="radio" name="ans" value="ya" onchange="submitAnswer('ya')">
+            <span>Ya</span>
+          </label>
+          <label class="radio-btn flex items-center gap-3 bg-[#06695f] p-3 rounded-md cursor-pointer hover:bg-[#07877a]">
+            <input type="radio" name="ans" value="tidak" onchange="submitAnswer('tidak')">
+            <span>Tidak</span>
+          </label>
+        </form>
+
+        ${current > 0
+          ? `<button onclick="goBack()" class="mt-6 w-full bg-gray-600 hover:bg-gray-700 transition-all text-white py-3 rounded-md font-semibold">Pertanyaan Sebelumnya</button>`
+          : ``}
+      `;
+    }
+
+    function submitAnswer(jawaban) {
+      const data = pertanyaan[current];
+      answers[data.kode] = (jawaban === "ya");
+
+      current++;
+      if (current < pertanyaan.length) {
+        renderQuestion();
+      } else {
+        tampilkanHasil();
+      }
+    }
+
+    function goBack() {
+      if (current > 0) {
+        current--;
+        renderQuestion();
+      }
+    }
+
+    function tampilkanHasil() {
+      let hasil = [];
+      let gejalaTerpenuhi = {};
+
+      // cek semua jawaban tidak
+      const semuaTidak = Object.values(answers).every(v => v === false);
+      if (semuaTidak) {
+        const isi = `
+          <div class="text-white text-center">
+            <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
+            <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
+              <h3 class="text-lg font-semibold mb-4 text-white">Tidak ada gejala kecanduan yang terdeteksi.</h3>
+              <p class="text-sm mb-4 text-gray-200">Jawaban Anda menunjukkan bahwa tidak ada tanda kecanduan pada tahap mana pun.</p>
+              <div class="mt-4">
+                <a href="index.html">
+                  <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+        document.getElementById("quiz-box").innerHTML = isi;
+        return;
+      }
+
+      // hitung proporsi tiap tahap
+      for (let kode in rules) {
+        const rule = rules[kode];
+        const totalGejala = rule.list.length;
+        gejalaTerpenuhi[kode] = [];
+        let terpenuhi = 0;
+
+        rule.list.forEach(k => {
+          if (answers[k] === true) {
+            terpenuhi++;
+            gejalaTerpenuhi[kode].push(k);
+          }
+        });
+
+        const proporsi = (terpenuhi / totalGejala) * 100;
+        hasil.push({ kode, nama: rule.nama, proporsi, matched: gejalaTerpenuhi[kode], totalPremis: totalGejala });
+      }
+
+      // cari max
+      let maxProp = Math.max(...hasil.map(h => h.proporsi));
+      let candidates = hasil.filter(h => h.proporsi === maxProp);
+
+      if (candidates.length > 1) {
+        candidates.sort((a, b) => parseInt(b.kode.slice(1)) - parseInt(a.kode.slice(1)));
+      }
+      const chosen = candidates[0];
+      const persentase = ((chosen.matched.length / chosen.totalPremis) * 100).toFixed(0);
+
+      const tahapInfo = {
+        P01: { nama: "Early Exposure", deskripsi: "Kamu baru mulai melihat konten seksual, mungkin merasa penasaran, canggung, atau sedikit tertarik.", saran: "Batasi paparan konten negatif dan lakukan kegiatan positif." },
+        P02: { nama: "Addiction", deskripsi: "Kebiasaan menonton konten vulgar mulai terbentuk dan sulit dikontrol.", saran: "Hindari pemicu, buat rutinitas sehat, dan bicarakan dengan orang yang dipercaya." },
+        P03: { nama: "Escalation", deskripsi: "Konten biasa terasa kurang, sehingga mencari variasi atau lebih ekstrem.", saran: "Coba detox digital dan minta dukungan teman/keluarga." },
+        P04: { nama: "Desensitization", deskripsi: "Konten ekstrem terasa biasa, rasa bersalah berkurang.", saran: "Pulihkan kontrol diri lewat kegiatan positif, konselor, atau bimbingan spiritual." },
+        P05: { nama: "Action", deskripsi: "Dorongan untuk mencoba nyata muncul, misalnya membeli alat bantu atau mencari pengalaman langsung.", saran: "Segera minta bantuan profesional dan dukungan spiritual." }
+      };
+
+      const info = tahapInfo[chosen.kode];
+      const urutanTahap = ["P01","P02","P03","P04","P05"];
+      const nomorTahap = urutanTahap.indexOf(chosen.kode) + 1;
+      const totalTahap = urutanTahap.length;
+
+      const isi = `
+        <div class="text-white text-center">
+          <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
+          <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
+            <h1 class="text-sm font-semibold mb-2 text-white">Anda terindikasi berada pada Tahap Ke(${nomorTahap}/${totalTahap})</h1>
+            <h3 class="text-lg font-semibold mb-2 text-white">Tahap Saat Ini : <span class="font-bold text-pink-300">${info.nama}</span></h3>
+            <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Deskripsi:</span><br>${info.deskripsi}</p>
+            <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Saran:</span><br>${info.saran}</p>
+            
+            <!-- Progress bar hasil -->
+            <div class="w-full bg-[#05594f] rounded-full h-3 mt-4 mb-2 overflow-hidden">
+              <div class="h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-500" style="width:${persentase}%"></div>
+            </div>
+            <p class="text-sm mt-1">Tingkat Kecanduan: <span class="font-bold">${persentase}%</span></p>
+
+            <div class="mt-4">
+              <a href="index.html">
+                <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById("quiz-box").innerHTML = isi;
+    }
+
+    // Start
+    renderQuestion();
+  </script>
+</body>
+</html>    let answers = {};
 
     function renderQuestion() {
       const data = pertanyaan[current];
@@ -259,6 +411,7 @@ const persentase = ((chosen.count / chosen.totalPremis) * 100).toFixed(0);
   </script>
 </body>
 </html>
+
 
 
 
