@@ -244,7 +244,7 @@
           <div class="h-6 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500" 
                style="width:${persentase}%"></div>
         </div>
-        <p class="text-white text-sm mt-2">Tingkat Kecanduan: <span class="font-bold">${persentase}% - ${kategori}</span></p>
+        <p class="text-white text-sm mt-2">Tingkat Kecanduan: <span class="font-bold">${persentase}% - ${kategori} di Tahap : ${info.nama} </span></p>
       </div>
 
       <div class="bg-[#0F6B60] p-6 rounded-lg max-w-md mx-auto">
@@ -257,7 +257,6 @@
         <div class="w-full bg-[#04423A] p-4 rounded-md mb-4 text-left">
           <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Deskripsi:</span><br>${info.deskripsi}</p>
           <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Saran:</span><br>${info.saran}</p>
-          <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Gejala terpenuhi:</span><br>${chosen.matched.join(', ') || '—'}</p>
         </div>
 
         <div class="mt-4">
