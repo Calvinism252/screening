@@ -3,267 +3,1147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Deteksi Kecanduan</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>PAST — Screening Kecanduan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
-    body {
-      font-family: "Inter", sans-serif;
+    :root {
+      --teal-deep: #014D43;
+      --teal-mid: #016B5E;
+      --teal-bright: #01897A;
+      --teal-light: #4DB6AC;
+      --mint: #E0F2F1;
+      --accent: #FF6B6B;
+      --accent2: #FFD166;
+      --bg: #031E1A;
+      --card-bg: #052E29;
+      --card-inner: #063D36;
+      --border: rgba(77,182,172,0.15);
+      --text-white: #FFFFFF;
+      --text-dim: rgba(255,255,255,0.6);
     }
-    .radio-btn input[type="radio"] {
-      accent-color: #00bfa6;
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      min-height: 100vh;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Background */
+    .bg-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow-1 {
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(1,137,122,0.15) 0%, transparent 70%);
+      top: -200px; right: -200px;
+    }
+
+    .bg-glow-2 {
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(1,107,94,0.1) 0%, transparent 70%);
+      bottom: -100px; left: -150px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      position: relative;
+      z-index: 10;
+      border-bottom: 1px solid var(--border);
+      background: rgba(3,30,26,0.8);
+      backdrop-filter: blur(12px);
+    }
+
+    .top-logo {
+      font-family: 'Sora', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      letter-spacing: 3px;
+      text-decoration: none;
+    }
+
+    .top-step-info {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+
+    .top-step-info span {
+      color: var(--teal-light);
+      font-weight: 700;
+    }
+
+    /* Main Container */
+    .main-wrap {
+      width: 100%;
+      max-width: 620px;
+      padding: 36px 20px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Welcome Screen */
+    .welcome-screen {
+      text-align: center;
+      padding: 40px 0;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .welcome-icon {
+      width: 88px; height: 88px;
+      background: linear-gradient(135deg, var(--teal-mid), var(--teal-bright));
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 28px;
+      box-shadow: 0 16px 40px rgba(1,107,94,0.4);
+    }
+
+    .welcome-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .welcome-sub {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto 32px;
+    }
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .info-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .info-card-num {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .info-card-label {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      margin-top: 3px;
+    }
+
+    .disclaimer-box {
+      background: rgba(255,209,102,0.08);
+      border: 1px solid rgba(255,209,102,0.25);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      text-align: left;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .disclaimer-box .disc-icon {
+      color: var(--accent2);
+      font-size: 1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .disclaimer-box p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    /* Progress Header */
+    .progress-header {
+      margin-bottom: 28px;
+    }
+
+    .progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .progress-phase {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--teal-light);
+      background: rgba(77,182,172,0.1);
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    .progress-pct {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--teal-bright), var(--teal-light));
+      transition: width 0.5s ease;
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      right: -1px; top: 50%;
+      transform: translateY(-50%);
+      width: 12px; height: 12px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(77,182,172,0.8);
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 4px;
+      margin-top: 10px;
+    }
+
+    .progress-dot {
+      flex: 1;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.08);
+      transition: background 0.3s;
+    }
+
+    .progress-dot.done {
+      background: var(--teal-bright);
+    }
+
+    .progress-dot.current {
+      background: var(--accent2);
+    }
+
+    /* Question Card */
+    .question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 20px;
+      animation: slideUp 0.4s ease both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .q-number {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .q-number .q-badge {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-family: 'Sora', sans-serif;
+      color: var(--teal-light);
+      font-weight: 700;
+    }
+
+    .q-text {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: white;
+      line-height: 1.6;
+    }
+
+    /* Answer Options */
+    .answers-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .answer-option {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .answer-option::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(1,137,122,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .answer-option:hover {
+      border-color: var(--teal-bright);
+      transform: translateX(4px);
+    }
+
+    .answer-option:hover::before {
+      opacity: 1;
+    }
+
+    .answer-option.selected-yes {
+      border-color: var(--teal-light);
+      background: rgba(77,182,172,0.1);
+    }
+
+    .answer-option.selected-no {
+      border-color: rgba(248,113,113,0.5);
+      background: rgba(248,113,113,0.06);
+    }
+
+    .answer-option.clicking {
+      transform: scale(0.98);
+    }
+
+    .answer-radio {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .answer-option:hover .answer-radio {
+      border-color: var(--teal-light);
+    }
+
+    .answer-option.selected-yes .answer-radio {
+      background: var(--teal-light);
+      border-color: var(--teal-light);
+    }
+
+    .answer-option.selected-yes .answer-radio::after {
+      content: '✓';
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .answer-option.selected-no .answer-radio {
+      background: rgba(248,113,113,0.7);
+      border-color: rgba(248,113,113,0.7);
+    }
+
+    .answer-option.selected-no .answer-radio::after {
+      content: '✗';
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .answer-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: white;
+    }
+
+    .answer-sublabel {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .answer-icon {
+      margin-left: auto;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .answer-option.selected-yes .answer-icon,
+    .answer-option.selected-no .answer-icon {
+      opacity: 1;
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-back {
+      flex: 0;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      color: var(--text-dim);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 14px 20px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    .btn-back:hover {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border-color: rgba(255,255,255,0.2);
+    }
+
+    /* Start & Next buttons */
+    .btn-start {
+      width: 100%;
+      background: linear-gradient(135deg, var(--teal-bright), #02AE9C);
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 18px 32px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 8px 30px rgba(1,137,122,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(1,137,122,0.5);
+    }
+
+    /* ===== RESULT SCREEN ===== */
+    .result-screen {
+      animation: fadeIn 0.6s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .result-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .result-badge.level-0 { background: rgba(74,222,128,0.12); color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
+    .result-badge.level-1 { background: rgba(250,204,21,0.12); color: #facc15; border: 1px solid rgba(250,204,21,0.25); }
+    .result-badge.level-2 { background: rgba(251,146,60,0.12); color: #fb923c; border: 1px solid rgba(251,146,60,0.25); }
+    .result-badge.level-3 { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+
+    .result-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .result-sub {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    /* Gauge */
+    .gauge-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .gauge-svg {
+      display: block;
+      margin: 0 auto 16px;
+    }
+
+    .gauge-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .gauge-stage {
+      font-size: 0.88rem;
+      color: var(--teal-light);
+      font-weight: 600;
+    }
+
+    /* Info box */
+    .result-info-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .result-info-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .result-info-label::before {
+      content: '';
+      display: block;
+      width: 16px; height: 2px;
+      background: var(--teal-light);
+    }
+
+    .result-info-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+
+    /* Stages breakdown */
+    .stages-result {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .stage-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .stage-row:last-child {
+      border-bottom: none;
+    }
+
+    .stage-row-label {
+      width: 120px;
+      flex-shrink: 0;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .stage-row-bar-wrap {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 100px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .stage-row-bar {
+      height: 100%;
+      border-radius: 100px;
+      transition: width 1s ease;
+    }
+
+    .stage-row-pct {
+      width: 36px;
+      text-align: right;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .stage-row-check {
+      width: 20px;
+      flex-shrink: 0;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    /* Result actions */
+    .result-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn-retake {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.8);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 16px 24px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-retake:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .btn-home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: linear-gradient(135deg, var(--teal-bright), #02AE9C);
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 16px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(1,137,122,0.3);
+    }
+
+    .btn-home:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(1,137,122,0.5);
+    }
+
+    /* No fullmatch state */
+    .no-match-box {
+      background: rgba(255,209,102,0.07);
+      border: 1px solid rgba(255,209,102,0.2);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .no-match-box .nm-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+    .no-match-box .nm-text { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+    .no-match-box .nm-text strong { color: var(--accent2); }
+
+    @media (max-width: 480px) {
+      .main-wrap { padding: 24px 16px 50px; }
+      .info-cards { grid-template-columns: repeat(3,1fr); gap: 8px; }
+      .question-card { padding: 24px 20px; }
+      .answer-option { padding: 16px 18px; }
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#03302B] flex items-center justify-center px-4">
+<body>
 
-  <div class="w-full max-w-xl bg-[#0F6B60] rounded-lg shadow-md p-6 md:p-10 text-white" id="quiz-box">
-    <!-- Dynamic content here -->
-  </div>
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
 
-  <script>
-    // Pertanyaan
-    const pertanyaan = [
-      { kode: "GA01", teks: "Apakah Anda merasa gemetar saat melihat adegan ranjang?" },
-      { kode: "GA02", teks: "Apakah ini pertama kali Anda melihat pria dan wanita tidak berpakaian?" },
-      { kode: "GA03", teks: "Apakah Anda merasa mual saat melihat pria dan wanita berciuman?" },
-      { kode: "GA04", teks: "Apakah Anda merasa khawatir jika melihat pornografi akan dimarahi?" },
-      { kode: "GA05", teks: "Apakah menurut Anda pria dan wanita tidak berpakaian di kamar adalah hal yang wajar?" },
-      { kode: "GA06", teks: "Apakah Anda menutup mata ketika tiba-tiba layar gadget memperlihatkan video vulgar?" },
-      { kode: "GA07", teks: "Apakah menurut Anda melihat area intim pria maupun wanita adalah dosa?" },
-      { kode: "GA08", teks: "Apakah Anda secara berkala mencari gambar/video vulgar?" },
-      { kode: "GA09", teks: "Apakah Anda merasa senang saat melihat pria dan wanita tidak berpakaian bersama?" },
-      { kode: "GA10", teks: "Apakah Anda merasa bersemangat melihat pria dan wanita berciuman?" },
-      { kode: "GA11", teks: "Apakah sulit bagi Anda membuka gadget tanpa membuka gambar porno?" },
-      { kode: "GA12", teks: "Apakah Anda merasa ada yang hilang jika tidak membuka gambar/video porno?" },
-      { kode: "GA13", teks: "Apakah Anda menikmati cerita romansa yang menceritakan adegan ranjang?" },
-      { kode: "GA14", teks: "Apakah Anda tertarik melihat adegan intim pria dan wanita?" },
-      { kode: "GA15", teks: "Apakah Anda merasa bergairah saat melihat video/gambar vulgar?" },
-      { kode: "GA16", teks: "Apakah Anda merasa pusing/tidak bersemangat jika tidak melihat video porno dalam sehari?" },
-      { kode: "GA17", teks: "Apakah Anda berusaha mencari gambar/video porno dari berbagai sumber/daerah?" },
-      { kode: "GA18", teks: "Apakah Anda merasa mendengarkan desahan orang berhubungan badan itu menyenangkan?" },
-      { kode: "GA19", teks: "Apakah dalam sehari Anda bisa melihat konten pornografi lebih dari satu kali?" },
-      { kode: "GA20", teks: "Apakah menurut Anda wajar jika semua orang melihat pornografi setiap hari?" },
-      { kode: "GA21", teks: "Apakah Anda merasa video/gambar porno kurang menarik?" },
-      { kode: "GA22", teks: "Apakah Anda merasa puas hanya dengan melihat orang berhubungan intim secara langsung?" },
-      { kode: "GA23", teks: "Apakah Anda mengekplorasi berbagai gerakan saat berhubungan badan?" },
-      { kode: "GA24", teks: "Apakah jumlah film porno yang dilihat tidak lagi memengaruhi kepuasan Anda?" },
-      { kode: "GA25", teks: "Apakah Anda merasa bosan hanya menonton film porno?" },
-      { kode: "GA26", teks: "Apakah gambar/film porno hanya berputar-putar di imajinasi Anda?" },
-      { kode: "GA27", teks: "Apakah Anda melakukan onani/masturbasi untuk memuaskan diri sendiri?" },
-      { kode: "GA28", teks: "Apakah Anda ingin memiliki pasangan untuk berhubungan intim?" },
-      { kode: "GA29", teks: "Apakah Anda ingin membeli alat bantu seks untuk memenuhi kebutuhan seksual?" },
-      { kode: "GA30", teks: "Apakah Anda sering menghabiskan waktu berjam-jam menonton pornografi sehingga mengorbankan aktivitas lain?" },
-    ];
+<!-- Top Bar -->
+<div class="top-bar">
+  <a href="index.html" class="top-logo">PAST</a>
+  <div class="top-step-info" id="topStepInfo">Screening Tool</div>
+</div>
 
-    // Rules
-    const rules = {
-      P01: { nama: "Early Exposure", list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"] },
-      P02: { nama: "Addiction", list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"] },
-      P03: { nama: "Escalation", list: ["GA16","GA17","GA18","GA19","GA20"] },
-      P04: { nama: "Desensitization", list: ["GA21","GA22","GA23","GA24","GA25","GA26"] },
-      P05: { nama: "Action", list: ["GA27","GA28","GA29","GA30"] },
-    };
+<!-- Main -->
+<div class="main-wrap" id="mainWrap">
+  <!-- Content rendered by JS -->
+</div>
 
-    // Deskripsi & saran tiap tahap (dipakai saat ada Tahap Utama yang pasti)
-    const tahapInfo = {
-      P01: {
-        nama: "Early Exposure",
-        deskripsi: "Kamu baru mulai melihat konten seksual, mungkin merasa penasaran, canggung, atau sedikit tertarik. Pada tahap ini, respons emosionalmu masih wajar dan bisa cepat hilang jika dijaga dengan kebiasaan positif.",
-        saran: "Perhatikan diri sendiri, batasi paparan konten negatif, dan lakukan kegiatan positif yang menyenangkan."
-      },
-      P02: {
-        nama: "Addiction",
-        deskripsi: "Kebiasaan menonton konten vulgar mulai terbentuk dan mulai sulit dikontrol. Kamu mungkin merasa ingin terus melihat konten meski tahu itu tidak baik, dan ini mulai memengaruhi waktu atau fokusmu sehari-hari.",
-        saran: "Hindari pemicu, buat rutinitas sehat, dan bicarakan ke orang yang bisa dipercaya atau psikiater untuk membantu kontrol diri."
-      },
-      P03: {
-        nama: "Escalation",
-        deskripsi: "Konten biasa mulai terasa kurang memuaskan, sehingga kamu mencari variasi atau konten yang lebih ekstrem. Perasaan ini bisa memunculkan kebiasaan intensif yang mengganggu kegiatan sehari-hari dan hubungan sosial.",
-        saran: "Coba detox digital, ubah kebiasaan, dan minta dukungan teman atau keluarga untuk membangun kontrol diri lebih kuat."
-      },
-      P04: {
-        nama: "Desensitization",
-        deskripsi: "Konten ekstrem terasa biasa, rasa bersalah mulai berkurang, dan perilaku ini terlihat normal. Kamu bisa mulai menganggap konten yang seharusnya menimbulkan batas wajar menjadi sesuatu yang rutin, sehingga risiko terhadap kebiasaan negatif meningkat.",
-        saran: "Pulihkan kontrol diri lewat kegiatan positif, komunitas sehat, dan bimbingan spiritual atau konselor."
-      },
-      P05: {
-        nama: "Action",
-        deskripsi: "Dorongan untuk mencoba hal nyata mulai muncul, seperti membeli alat bantu atau mencari pengalaman langsung. Pada tahap ini, perilaku bisa berisiko tinggi dan memengaruhi kehidupan nyata secara signifikan, sehingga butuh perhatian serius.",
-        saran: "Segera minta bantuan profesional dan dukungan spiritual. Tahap ini serius, jangan ditunda, dan prioritaskan keselamatan diri."
-      }
-    };
+<script>
+  const pertanyaan = [
+    { kode: "GA01", teks: "Apakah Anda merasa gemetar saat melihat adegan ranjang?" },
+    { kode: "GA02", teks: "Apakah ini pertama kali Anda melihat pria dan wanita tidak berpakaian?" },
+    { kode: "GA03", teks: "Apakah Anda merasa mual saat melihat pria dan wanita berciuman?" },
+    { kode: "GA04", teks: "Apakah Anda merasa khawatir jika melihat pornografi akan dimarahi?" },
+    { kode: "GA05", teks: "Apakah menurut Anda pria dan wanita tidak berpakaian di kamar adalah hal yang wajar?" },
+    { kode: "GA06", teks: "Apakah Anda menutup mata ketika tiba-tiba layar gadget memperlihatkan video vulgar?" },
+    { kode: "GA07", teks: "Apakah menurut Anda melihat area intim pria maupun wanita adalah dosa?" },
+    { kode: "GA08", teks: "Apakah Anda secara berkala mencari gambar/video vulgar?" },
+    { kode: "GA09", teks: "Apakah Anda merasa senang saat melihat pria dan wanita tidak berpakaian bersama?" },
+    { kode: "GA10", teks: "Apakah Anda merasa bersemangat melihat pria dan wanita berciuman?" },
+    { kode: "GA11", teks: "Apakah sulit bagi Anda membuka gadget tanpa membuka gambar porno?" },
+    { kode: "GA12", teks: "Apakah Anda merasa ada yang hilang jika tidak membuka gambar/video porno?" },
+    { kode: "GA13", teks: "Apakah Anda menikmati cerita romansa yang menceritakan adegan ranjang?" },
+    { kode: "GA14", teks: "Apakah Anda tertarik melihat adegan intim pria dan wanita?" },
+    { kode: "GA15", teks: "Apakah Anda merasa bergairah saat melihat video/gambar vulgar?" },
+    { kode: "GA16", teks: "Apakah Anda merasa pusing/tidak bersemangat jika tidak melihat video porno dalam sehari?" },
+    { kode: "GA17", teks: "Apakah Anda berusaha mencari gambar/video porno dari berbagai sumber/daerah?" },
+    { kode: "GA18", teks: "Apakah Anda merasa mendengarkan desahan orang berhubungan badan itu menyenangkan?" },
+    { kode: "GA19", teks: "Apakah dalam sehari Anda bisa melihat konten pornografi lebih dari satu kali?" },
+    { kode: "GA20", teks: "Apakah menurut Anda wajar jika semua orang melihat pornografi setiap hari?" },
+    { kode: "GA21", teks: "Apakah Anda merasa video/gambar porno kurang menarik?" },
+    { kode: "GA22", teks: "Apakah Anda merasa puas hanya dengan melihat orang berhubungan intim secara langsung?" },
+    { kode: "GA23", teks: "Apakah Anda mengeksplorasi berbagai gerakan saat berhubungan badan?" },
+    { kode: "GA24", teks: "Apakah jumlah film porno yang dilihat tidak lagi memengaruhi kepuasan Anda?" },
+    { kode: "GA25", teks: "Apakah Anda merasa bosan hanya menonton film porno?" },
+    { kode: "GA26", teks: "Apakah gambar/film porno hanya berputar-putar di imajinasi Anda?" },
+    { kode: "GA27", teks: "Apakah Anda melakukan onani/masturbasi untuk memuaskan diri sendiri?" },
+    { kode: "GA28", teks: "Apakah Anda ingin memiliki pasangan untuk berhubungan intim?" },
+    { kode: "GA29", teks: "Apakah Anda ingin membeli alat bantu seks untuk memenuhi kebutuhan seksual?" },
+    { kode: "GA30", teks: "Apakah Anda sering menghabiskan waktu berjam-jam menonton pornografi sehingga mengorbankan aktivitas lain?" },
+  ];
 
-    let current = 0;
-    let answers = {};
+  const rules = {
+    P01: { nama: "Early Exposure",   list: ["GA01","GA02","GA03","GA04","GA05","GA06","GA07"] },
+    P02: { nama: "Addiction",        list: ["GA08","GA09","GA10","GA11","GA12","GA13","GA14","GA15"] },
+    P03: { nama: "Escalation",       list: ["GA16","GA17","GA18","GA19","GA20"] },
+    P04: { nama: "Desensitization",  list: ["GA21","GA22","GA23","GA24","GA25","GA26"] },
+    P05: { nama: "Action",           list: ["GA27","GA28","GA29","GA30"] },
+  };
 
-    function renderQuestion() {
-      const data = pertanyaan[current];
-      const percent = Math.round((current / pertanyaan.length) * 100);
-      const sisa = pertanyaan.length - current;
+  const stageColors = {
+    P01: 'linear-gradient(90deg,#4ade80,#22d3ee)',
+    P02: 'linear-gradient(90deg,#fde047,#fb923c)',
+    P03: 'linear-gradient(90deg,#fb923c,#f87171)',
+    P04: 'linear-gradient(90deg,#c084fc,#f472b6)',
+    P05: 'linear-gradient(90deg,#ef4444,#dc2626)',
+  };
 
-      document.getElementById("quiz-box").innerHTML = `
-        <h2 class="text-center text-2xl font-bold mb-2">PORNOGRAPHY ADDICTION SCREEN</h2>
-        <p class="text-center text-sm mb-4">Total test: ${percent}% completed</p>
-
-        <div class="w-full bg-[#05594f] rounded-full h-3 mb-6 overflow-hidden">
-          <div class="h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-500" style="width:${percent}%"></div>
-        </div>
-
-        <p class="text-center text-xs text-gray-200 mb-6">${sisa} Questions Left</p>
-
-        <div class="bg-[#05594f] p-4 rounded-md mb-6">
-          <p class="text-lg">${data.teks}</p>
-        </div>
-
-        <form id="form-ans" class="space-y-4">
-          <label class="radio-btn flex items-center gap-3 bg-[#06695f] p-3 rounded-md cursor-pointer hover:bg-[#07877a]">
-            <input type="radio" name="ans" value="ya" onchange="submitAnswer('ya')">
-            <span>Ya</span>
-          </label>
-          <label class="radio-btn flex items-center gap-3 bg-[#06695f] p-3 rounded-md cursor-pointer hover:bg-[#07877a]">
-            <input type="radio" name="ans" value="tidak" onchange="submitAnswer('tidak')">
-            <span>Tidak</span>
-          </label>
-        </form>
-
-        ${current > 0
-          ? `<button onclick="goBack()" class="mt-6 w-full bg-gray-600 hover:bg-gray-700 transition-all text-white py-3 rounded-md font-semibold">Pertanyaan Sebelumnya</button>`
-          : ``}
-      `;
+  const tahapInfo = {
+    P01: {
+      nama: "Early Exposure",
+      kategoriLevel: 0,
+      deskripsi: "Kamu baru mulai melihat konten seksual, mungkin merasa penasaran, canggung, atau sedikit tertarik. Pada tahap ini, respons emosionalmu masih wajar dan bisa cepat hilang jika dijaga dengan kebiasaan positif.",
+      saran: "Perhatikan diri sendiri, batasi paparan konten negatif, dan lakukan kegiatan positif yang menyenangkan seperti olahraga, seni, atau mengembangkan hobi."
+    },
+    P02: {
+      nama: "Addiction",
+      kategoriLevel: 1,
+      deskripsi: "Kebiasaan menonton konten vulgar mulai terbentuk dan sulit dikontrol. Kamu mungkin merasa ingin terus melihat konten meski tahu itu tidak baik, dan ini mulai memengaruhi waktu atau fokusmu sehari-hari.",
+      saran: "Hindari pemicu, buat rutinitas sehat, dan bicarakan ke orang yang bisa dipercaya atau konsultan untuk membantu kontrol diri."
+    },
+    P03: {
+      nama: "Escalation",
+      kategoriLevel: 2,
+      deskripsi: "Konten biasa mulai terasa kurang memuaskan, sehingga kamu mencari variasi atau konten yang lebih ekstrem. Perasaan ini bisa memunculkan kebiasaan intensif yang mengganggu kegiatan dan hubungan sosial.",
+      saran: "Coba detox digital, ubah kebiasaan, dan minta dukungan teman atau keluarga untuk membangun kontrol diri lebih kuat."
+    },
+    P04: {
+      nama: "Desensitization",
+      kategoriLevel: 2,
+      deskripsi: "Konten ekstrem terasa biasa, rasa bersalah mulai berkurang, dan perilaku ini terlihat normal. Risiko terhadap kebiasaan negatif semakin meningkat karena batasan nilai sudah terkikis.",
+      saran: "Pulihkan kontrol diri lewat kegiatan positif, komunitas sehat, dan bimbingan spiritual atau konselor profesional."
+    },
+    P05: {
+      nama: "Action",
+      kategoriLevel: 3,
+      deskripsi: "Dorongan untuk mencoba hal nyata mulai muncul. Pada tahap ini, perilaku bisa berisiko tinggi dan memengaruhi kehidupan nyata secara signifikan, sehingga butuh perhatian serius segera.",
+      saran: "Segera minta bantuan profesional dan dukungan spiritual. Tahap ini serius — jangan ditunda. Prioritaskan keselamatan dan kesehatan diri Anda."
     }
+  };
 
-    function submitAnswer(jawaban) {
-      const data = pertanyaan[current];
-      answers[data.kode] = (jawaban === "ya");
+  const phaseNames = {
+    P01: ['GA01','GA02','GA03','GA04','GA05','GA06','GA07'],
+    P02: ['GA08','GA09','GA10','GA11','GA12','GA13','GA14','GA15'],
+    P03: ['GA16','GA17','GA18','GA19','GA20'],
+    P04: ['GA21','GA22','GA23','GA24','GA25','GA26'],
+    P05: ['GA27','GA28','GA29','GA30'],
+  };
 
-      current++;
-      if (current < pertanyaan.length) {
-        renderQuestion();
-      } else {
-        tampilkanHasil();
-      }
+  function getPhaseForQuestion(kode) {
+    for (let p in phaseNames) {
+      if (phaseNames[p].includes(kode)) return p;
     }
+    return 'P01';
+  }
 
-    function goBack() {
-      if (current > 0) {
-        current--;
-        renderQuestion();
-      }
-    }
+  const phaseLabels = {
+    P01: 'Early Exposure', P02: 'Addiction', P03: 'Escalation',
+    P04: 'Desensitization', P05: 'Action'
+  };
 
-    function tampilkanHasil() {
-      let hasil = [];
+  let current = -1;
+  let answers = {};
 
-      // Hitung coverage semua rules
-      for (let kode in rules) {
-        const rule = rules[kode];
-        const totalGejala = rule.list.length;
-        let terpenuhi = 0;
+  const wrap = document.getElementById('mainWrap');
+  const topStepInfo = document.getElementById('topStepInfo');
 
-        rule.list.forEach(k => {
-          if (answers[k] === true) terpenuhi++;
-        });
+  function renderWelcome() {
+    topStepInfo.textContent = 'Screening Tool';
+    wrap.innerHTML = `
+      <div class="welcome-screen">
+        <div class="welcome-icon">🧠</div>
+        <h1 class="welcome-title">Pornography Addiction<br>Screening</h1>
+        <p class="welcome-sub">Jawab ${pertanyaan.length} pertanyaan singkat secara jujur. Tidak ada jawaban benar atau salah. Semua data bersifat anonim dan tidak disimpan.</p>
 
-        const proporsi = (terpenuhi / totalGejala) * 100;
-        hasil.push({
-          kode,
-          nama: rule.nama,
-          proporsi: Math.round(proporsi),
-          terpenuhi,
-          totalPremis: totalGejala
-        });
-      }
-
-      // Cari rule full match (100%)
-      let fullMatch = hasil.filter(h => h.proporsi === 100);
-
-      // jika ada full match -> pilih yang kode paling tinggi (P05 > P04 ...)
-      let finalStage = null;
-      if (fullMatch.length > 0) {
-        fullMatch.sort((a, b) => parseInt(b.kode.slice(1)) - parseInt(a.kode.slice(1)));
-        finalStage = fullMatch[0]; // Tahap utama pasti
-      }
-
-      // Jika tidak ada full match, pilih kandidat tertinggi (untuk ditampilkan sebagai 'terdekat')
-      hasil.sort((a, b) => b.proporsi - a.proporsi);
-      const topKandidat = hasil[0];
-
-      // Buat teks Tahap Utama dan area deskripsi/saran bila ada finalStage
-      let tahapUtamaText = "";
-      let deskripsiSaranHTML = "";
-
-      if (finalStage) {
-        // tentukan kategori berdasarkan proporsi pada tahap yang terpilih (biasanya 100)
-        const persentase = finalStage.proporsi;
-        let kategori = "";
-        if (persentase < 30) kategori = "Belum Terindikasi";
-        else if (persentase < 40) kategori = "Kecanduan Ringan";
-        else if (persentase < 60) kategori = "Kecanduan Sedang";
-        else kategori = "Kecanduan Berat";
-
-        const info = tahapInfo[finalStage.kode] || { nama: finalStage.nama, deskripsi: "", saran: "" };
-
-        tahapUtamaText = `
-          <h3 class="text-lg font-semibold mb-2 text-white">Tahap Saat Ini : <span class="font-bold text-pink-300">${info.nama}</span></h3>
-          <h1 class="text-white font-semibold text-sm mt-2">Anda Terindikasi ${kategori}</h1>
-          <h1 class="text-white font-semibold text-sm mt-2">Dengan Tingkat Kecanduan Sebesar <span class="font-bold">${persentase}% Di Tahap Ini.</span></h1>
-        `;
-
-        deskripsiSaranHTML = `
-          <div class="w-full bg-[#04423A] p-4 rounded-md mb-4 text-left">
-            <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Deskripsi:</span><br>${info.deskripsi}</p>
-            <p class="text-sm text-gray-200 mb-2"><span class="font-bold text-white">Saran:</span><br>${info.saran}</p>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">📋</div>
+            <div class="info-card-num">30</div>
+            <div class="info-card-label">Pertanyaan</div>
           </div>
-        `;
-      } else {
-        // Tidak ada full match
-        tahapUtamaText = `
-          <p class="text-sm mb-2"><span class="font-bold text-white">Tahap Utama :</span><br>
-          Belum Terindikasi Tahap Utama, namun gejala tertinggi mendekati Tahap <span class="font-bold text-pink-300">${topKandidat.nama}</span> dengan coverage terbesar ${topKandidat.proporsi}%.</p>
-        `;
-        // Tidak menampilkan deskripsi/saran tahap penuh karena belum ada tahap utama
-      }
-
-      // Siapkan list coverage lengkap
-      let listCoverage = hasil
-        .map(h => `- ${h.kode} ${h.nama}: ${h.proporsi}% ${h.proporsi === 100 ? "✅" : ""}`)
-        .join("<br>");
-
-      // Jika tidak ada finalStage, gunakan topKandidat.proporsi untuk progress bar; jika ada finalStage gunakan finalStage.proporsi
-      const barWidth = finalStage ? finalStage.proporsi : topKandidat.proporsi;
-
-      const isi = `
-        <div class="text-white text-center">
-          <h2 class="text-2xl font-bold mb-4">Hasil Diagnosa</h2>
-
-          <div class="w-full mb-4">
-            <div class="w-full bg-[#04423A] rounded-full h-6">
-              <div class="h-6 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500" 
-                   style="width:${barWidth}%"></div>
-            </div><br>
-            ${tahapUtamaText}
+          <div class="info-card">
+            <div class="info-card-icon">⏱️</div>
+            <div class="info-card-num">~5</div>
+            <div class="info-card-label">Menit</div>
           </div>
-
-          ${deskripsiSaranHTML}
-
-          <div class="w-full mb-4 bg-[#04423A] rounded-lg p-4 text-left">
-            <p class="text-sm mb-2"><span class="font-bold text-white">Tahapan :</span><br>${listCoverage}</p>
-          </div>
-
-          <div class="mt-4">
-            <a href="index.html">
-              <button class="bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-md text-white font-bold">Kembali ke Dashboard</button>
-            </a>
+          <div class="info-card">
+            <div class="info-card-icon">🔒</div>
+            <div class="info-card-num">100%</div>
+            <div class="info-card-label">Anonim</div>
           </div>
         </div>
-      `;
 
-      document.getElementById("quiz-box").innerHTML = isi;
-    }
+        <div class="disclaimer-box">
+          <span class="disc-icon"><i class="fas fa-triangle-exclamation"></i></span>
+          <p>Screening ini bukan pengganti diagnosis medis atau psikologis resmi. Hasil hanya sebagai indikasi awal dan panduan refleksi diri. Jika merasa membutuhkan bantuan, konsultasikan dengan profesional.</p>
+        </div>
 
-    // Start
+        <button class="btn-start" onclick="startQuiz()">
+          <i class="fas fa-play"></i>
+          Mulai Screening Sekarang
+        </button>
+      </div>
+    `;
+  }
+
+  function startQuiz() {
+    current = 0;
     renderQuestion();
-  </script>
+  }
+
+  function renderQuestion() {
+    const data = pertanyaan[current];
+    const total = pertanyaan.length;
+    const pct = Math.round((current / total) * 100);
+    const phase = getPhaseForQuestion(data.kode);
+    const phaseName = phaseLabels[phase];
+    const remaining = total - current;
+
+    topStepInfo.innerHTML = `Soal <span>${current + 1}</span> dari <span>${total}</span>`;
+
+    // Dots - only show 10 dots representing segments
+    const segCount = 10;
+    let dotsHTML = '';
+    for (let i = 0; i < segCount; i++) {
+      const segFilled = Math.floor((current / total) * segCount);
+      let cls = i < segFilled ? 'done' : (i === segFilled ? 'current' : '');
+      dotsHTML += `<div class="progress-dot ${cls}"></div>`;
+    }
+
+    wrap.innerHTML = `
+      <div class="progress-header">
+        <div class="progress-meta">
+          <div class="progress-phase"><i class="fas fa-layer-group" style="font-size:0.65rem;"></i>${phaseName}</div>
+          <div class="progress-pct">${pct}%</div>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${pct}%"></div>
+        </div>
+        <div class="progress-dots">${dotsHTML}</div>
+      </div>
+
+      <div class="question-card">
+        <div class="q-number">
+          <span class="q-badge">${String(current + 1).padStart(2,'0')}</span>
+          ${remaining > 1 ? `${remaining} pertanyaan tersisa` : 'Pertanyaan terakhir!'}
+        </div>
+        <div class="q-text">${data.teks}</div>
+      </div>
+
+      <div class="answers-wrap">
+        <div class="answer-option" id="opt-ya" onclick="pilihJawaban('ya')">
+          <div class="answer-radio" id="radio-ya"></div>
+          <div>
+            <div class="answer-label">Ya</div>
+            <div class="answer-sublabel">Saya mengalami hal ini</div>
+          </div>
+          <div class="answer-icon">✅</div>
+        </div>
+        <div class="answer-option" id="opt-tidak" onclick="pilihJawaban('tidak')">
+          <div class="answer-radio" id="radio-tidak"></div>
+          <div>
+            <div class="answer-label">Tidak</div>
+            <div class="answer-sublabel">Saya tidak mengalami ini</div>
+          </div>
+          <div class="answer-icon">❌</div>
+        </div>
+      </div>
+
+      ${current > 0 ? `
+        <div class="nav-buttons">
+          <button class="btn-back" onclick="goBack()"><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  function pilihJawaban(val) {
+    const optYa = document.getElementById('opt-ya');
+    const optTidak = document.getElementById('opt-tidak');
+
+    if (val === 'ya') {
+      optYa.classList.add('selected-yes', 'clicking');
+      optTidak.classList.remove('selected-no');
+    } else {
+      optTidak.classList.add('selected-no', 'clicking');
+      optYa.classList.remove('selected-yes');
+    }
+
+    setTimeout(() => {
+      optYa && optYa.classList.remove('clicking');
+      optTidak && optTidak.classList.remove('clicking');
+      submitAnswer(val);
+    }, 280);
+  }
+
+  function submitAnswer(jawaban) {
+    const data = pertanyaan[current];
+    answers[data.kode] = (jawaban === 'ya');
+    current++;
+    if (current < pertanyaan.length) {
+      renderQuestion();
+    } else {
+      tampilkanHasil();
+    }
+  }
+
+  function goBack() {
+    if (current > 0) {
+      current--;
+      renderQuestion();
+    }
+  }
+
+  function tampilkanHasil() {
+    topStepInfo.innerHTML = '<span>Hasil</span> Diagnosa';
+
+    let hasil = [];
+    for (let kode in rules) {
+      const rule = rules[kode];
+      let terpenuhi = 0;
+      rule.list.forEach(k => { if (answers[k] === true) terpenuhi++; });
+      const proporsi = Math.round((terpenuhi / rule.list.length) * 100);
+      hasil.push({ kode, nama: rule.nama, proporsi, terpenuhi, total: rule.list.length });
+    }
+
+    let fullMatch = hasil.filter(h => h.proporsi === 100);
+    hasil.sort((a, b) => b.proporsi - a.proporsi);
+
+    let finalStage = null;
+    if (fullMatch.length > 0) {
+      fullMatch.sort((a, b) => parseInt(b.kode.slice(1)) - parseInt(a.kode.slice(1)));
+      finalStage = fullMatch[0];
+    }
+    const topKandidat = hasil[0];
+
+    // Build stages rows
+    const stagesHTML = hasil.map(h => {
+      const isFinal = finalStage && h.kode === finalStage.kode;
+      return `
+        <div class="stage-row">
+          <div class="stage-row-label" style="color: ${isFinal ? 'white' : ''}; font-weight: ${isFinal ? '700' : '400'}">${h.nama}</div>
+          <div class="stage-row-bar-wrap">
+            <div class="stage-row-bar" style="width:${h.proporsi}%; background:${stageColors[h.kode]}"></div>
+          </div>
+          <div class="stage-row-pct" style="color:${isFinal ? 'white' : ''}">${h.proporsi}%</div>
+          <div class="stage-row-check">${h.proporsi === 100 ? '✅' : ''}</div>
+        </div>
+      `;
+    }).join('');
+
+    let mainContent = '';
+    if (finalStage) {
+      const info = tahapInfo[finalStage.kode];
+      const lvl = info.kategoriLevel;
+      const kategori = ['Belum Terindikasi','Kecanduan Ringan','Kecanduan Sedang','Kecanduan Berat'][lvl] || 'Kecanduan Berat';
+      const levelClass = ['level-0','level-1','level-2','level-3'][lvl] || 'level-3';
+
+      // SVG Gauge
+      const gaugeAngle = (finalStage.proporsi / 100) * 180;
+      const r = 70;
+      const cx = 100, cy = 90;
+      const startX = cx - r, startY = cy;
+      const rad = (gaugeAngle - 180) * (Math.PI / 180);
+      const endX = cx + r * Math.cos(rad);
+      const endY = cy + r * Math.sin(rad);
+      const largeArc = gaugeAngle > 180 ? 1 : 0;
+      const gaugeColor = lvl === 0 ? '#4ade80' : lvl === 1 ? '#facc15' : lvl === 2 ? '#fb923c' : '#f87171';
+
+      mainContent = `
+        <div class="result-header">
+          <div class="result-badge ${levelClass}"><i class="fas fa-circle-check"></i>${kategori}</div>
+          <div class="result-title">Tahap ${info.nama}</div>
+          <div class="result-sub">Tingkat kecanduan terdeteksi ${finalStage.proporsi}% pada tahap ini</div>
+        </div>
+
+        <div class="gauge-wrap">
+          <svg class="gauge-svg" width="200" height="110" viewBox="0 0 200 110">
+            <!-- Track -->
+            <path d="M30 90 A70 70 0 0 1 170 90" stroke="rgba(255,255,255,0.07)" stroke-width="14" fill="none" stroke-linecap="round"/>
+            <!-- Fill -->
+            <path d="M30 90 A70 70 0 ${largeArc} 1 ${endX.toFixed(1)} ${endY.toFixed(1)}" stroke="${gaugeColor}" stroke-width="14" fill="none" stroke-linecap="round" style="filter:drop-shadow(0 0 6px ${gaugeColor}88)"/>
+            <!-- Center dot -->
+            <circle cx="${cx}" cy="${cy}" r="6" fill="${gaugeColor}"/>
+          </svg>
+          <div class="gauge-label">${finalStage.proporsi}%</div>
+          <div class="gauge-stage">${info.nama}</div>
+        </div>
+
+        <div class="result-info-box">
+          <div class="result-info-label">Deskripsi</div>
+          <div class="result-info-text">${info.deskripsi}</div>
+        </div>
+
+        <div class="result-info-box" style="border-color: rgba(255,209,102,0.2); background: rgba(255,209,102,0.05);">
+          <div class="result-info-label" style="color: #FFD166;">Saran Tindakan</div>
+          <div class="result-info-text">${info.saran}</div>
+        </div>
+      `;
+    } else {
+      mainContent = `
+        <div class="result-header">
+          <div class="result-badge level-0"><i class="fas fa-circle-info"></i>Belum Terindikasi</div>
+          <div class="result-title">Tidak Ada Tahap Penuh</div>
+          <div class="result-sub">Gejala tertinggi mendekati tahap ${topKandidat.nama}</div>
+        </div>
+
+        <div class="no-match-box">
+          <div class="nm-icon">ℹ️</div>
+          <div class="nm-text">
+            Tidak ada tahap kecanduan yang terpenuhi sepenuhnya. Gejala tertinggi Anda ada di tahap <strong>${topKandidat.nama}</strong> dengan coverage <strong>${topKandidat.proporsi}%</strong>. Tetap jaga diri dan perhatikan perkembangannya.
+          </div>
+        </div>
+      `;
+    }
+
+    wrap.innerHTML = `
+      <div class="result-screen">
+        ${mainContent}
+
+        <div class="stages-result">
+          <div class="result-info-label" style="margin-bottom:14px;">Detail Semua Tahapan</div>
+          ${stagesHTML}
+        </div>
+
+        <div class="result-actions">
+          <a href="index.html" class="btn-home"><i class="fas fa-house"></i> Kembali ke Beranda</a>
+          <button class="btn-retake" onclick="resetQuiz()"><i class="fas fa-rotate-right"></i> Ulangi Screening</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function resetQuiz() {
+    current = -1;
+    answers = {};
+    renderWelcome();
+  }
+
+  // Init
+  renderWelcome();
+</script>
 </body>
 </html>
